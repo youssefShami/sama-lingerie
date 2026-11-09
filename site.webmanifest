@@ -1,0 +1,13 @@
+{
+  "name": "Sama Lingerie",
+  "short_name": "Sama",
+  "description": "Everyday lingerie, pajamas and loungewear in Saida, Lebanon.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFC466",
+  "theme_color": "#FFC466",
+  "icons": [
+    { "src": "/img/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/img/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

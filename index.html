@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="is-loading">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sama Lingerie — Saida, Lebanon</title>
+  <meta name="description" content="Sama Lingerie: feminine everyday lingerie, pajamas and loungewear imported from Turkey. Bridal trousseau (jihaz) in one place. Saida, Lebanon. Delivery all over Lebanon." />
+  <meta name="theme-color" content="#FFC466" />
+  <meta property="og:title" content="Sama Lingerie — soft things for real days" />
+  <meta property="og:description" content="Everyday lingerie, pajamas & loungewear in Saida. Bridal trousseau in one place. Order on WhatsApp." />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://sama-lingerie.netlify.app/" />
+  <link rel="icon" href="/favicon.ico" sizes="48x48" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta property="og:url" content="https://sama-lingerie.netlify.app/" />
+  <meta property="og:image" content="https://sama-lingerie.netlify.app/img/og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Sama Lingerie" />
+  <meta property="og:locale" content="en_LB" />
+  <meta property="og:locale:alternate" content="ar_LB" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Montserrat:wght@400;500;600;700&family=Lalezar&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="img/logo-white.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="shop.css" />
+</head>
+<body>
+
+<!-- ============ SVG SPRITE ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="daisy" viewBox="0 0 100 100">
+      <g fill="currentColor">
+        <ellipse cx="50" cy="22" rx="13" ry="20"/>
+        <ellipse cx="50" cy="78" rx="13" ry="20"/>
+        <ellipse cx="22" cy="50" rx="20" ry="13"/>
+        <ellipse cx="78" cy="50" rx="20" ry="13"/>
+        <ellipse cx="30" cy="30" rx="13" ry="20" transform="rotate(-45 30 30)"/>
+        <ellipse cx="70" cy="70" rx="13" ry="20" transform="rotate(-45 70 70)"/>
+        <ellipse cx="70" cy="30" rx="13" ry="20" transform="rotate(45 70 30)"/>
+        <ellipse cx="30" cy="70" rx="13" ry="20" transform="rotate(45 30 70)"/>
+      </g>
+      <circle cx="50" cy="50" r="11" fill="var(--daisy-core, #FFC466)"/>
+    </symbol>
+    <symbol id="wa" viewBox="0 0 32 32">
+      <path fill="currentColor" d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.3.6 4.5 1.8 6.4L3 29l7.2-1.9a12.7 12.7 0 0 0 5.8 1.4c7 0 12.7-5.6 12.7-12.6S23 3 16 3zm0 23a10.5 10.5 0 0 1-5.4-1.5l-.4-.2-4.3 1.1 1.2-4.1-.3-.4a10.3 10.3 0 0 1-1.6-5.6C5.2 10 10 5.2 16 5.2S26.8 10 26.8 15.8 22 26 16 26zm5.9-7.8c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2l-1 1.3c-.2.2-.4.2-.7.1a8.6 8.6 0 0 1-4.3-3.7c-.3-.6.3-.5.9-1.7.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.3 1.4 3.5c.2.2 2.4 3.6 5.8 5 2.1.9 3 1 4 .8.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5l-.6-.4z"/>
+    </symbol>
+    <symbol id="ig" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="1.8" d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4z"/>
+      <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/>
+    </symbol>
+    <symbol id="arrow" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============ SCROLL PROGRESS ============ -->
+<div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+<div class="progress-daisy" id="progressDaisy" aria-hidden="true"><svg><use href="#daisy"/></svg></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <a class="nav__logo" dir="ltr" href="#top" aria-label="Sama Lingerie — home">
+    <img src="img/word-ink.png" alt="sama" width="1687" height="524" />
+  </a>
+  <nav class="nav__links" aria-label="Primary">
+    <a href="#collections" data-i18n="nav.collections">Collections</a>
+    <a href="#shop" data-i18n="nav.shop">Shop</a>
+    <a href="#offers" data-i18n="nav.offers">Offers</a>
+    <a href="#bridal" data-i18n="nav.bridal">Bridal</a>
+    <a href="about.html" data-i18n="nav.about">About</a>
+    <a href="#contact" data-i18n="nav.contact">Contact</a>
+  </nav>
+  <div class="nav__right">
+    <button class="cart-btn" type="button" data-cart-open aria-label="Open bag">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M6 8h12l1 13H5L6 8z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M9 10V7a3 3 0 0 1 6 0v3"/></svg>
+      <b data-cart-count class="is-zero">0</b>
+    </button>
+    <button class="lang" id="langToggle" type="button" aria-label="Switch language">
+      <span data-lang="en">EN</span><i></i><span data-lang="ar">عربي</span>
+    </button>
+    <a class="btn btn--dark btn--sm magnetic" href="https://wa.me/96176910051" target="_blank" rel="noopener">
+      <svg class="btn__ico"><use href="#wa"/></svg><span data-i18n="nav.order">Order</span>
+    </a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <!-- loading sheet: covers the hero decor while the logo plays its intro, then fades. Same yellow, so no cut. -->
+  <div class="hero__sheet" id="heroSheet" aria-hidden="true"><div class="hero__bar"><i></i></div></div>
+  <div class="hero__daisies" aria-hidden="true">
+    <svg class="fd fd-1" data-speed="0.35"><use href="#daisy"/></svg>
+    <svg class="fd fd-2" data-speed="0.6"><use href="#daisy"/></svg>
+    <svg class="fd fd-3" data-speed="0.25"><use href="#daisy"/></svg>
+    <svg class="fd fd-4" data-speed="0.8"><use href="#daisy"/></svg>
+    <svg class="fd fd-5" data-speed="0.45"><use href="#daisy"/></svg>
+  </div>
+
+  <div class="hero__inner">
+    <p class="hero__eyebrow"><span data-i18n="hero.eyebrow">Saida, Lebanon · est. 2025</span></p>
+    <h1 class="hero__logo" aria-label="Sama Lingerie">
+      <img class="hero__logoimg" src="img/logo-white.png" alt="sama lingerie" width="1718" height="662" fetchpriority="high" decoding="sync" />
+    </h1>
+    <p class="hero__tag" data-i18n="hero.tag">Every woman deserves to feel beautiful in her own way. Explore our collection, where elegance, confidence, and femininity come together.</p>
+    <div class="hero__cta">
+      <a class="btn btn--white magnetic" href="https://wa.me/96176910051" target="_blank" rel="noopener"><svg class="btn__ico"><use href="#wa"/></svg><span data-i18n="hero.cta1">Order on WhatsApp</span></a>
+      <a class="btn btn--ghost magnetic" href="#collections"><span data-i18n="hero.cta2">Explore collections</span><svg class="btn__ico btn__ico--end"><use href="#arrow"/></svg></a>
+    </div>
+  </div>
+
+  <div class="hero__scroll" aria-hidden="true">
+    <span data-i18n="hero.scroll">scroll</span>
+    <i></i>
+  </div>
+
+  <div class="hero__photo hero__photo--l" data-parallax="-0.15">
+    <img src="https://images.unsplash.com/photo-1768696083097-600943ad9d05?auto=format&fit=crop&w=1200&q=80" alt="Soft pajama set folded on a bed" loading="eager" decoding="async" fetchpriority="high" />
+  </div>
+  <div class="hero__photo hero__photo--r" data-parallax="0.12">
+    <img src="https://images.pexels.com/photos/28761349/pexels-photo-28761349.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Silk robe hanging in soft light" loading="eager" decoding="async" fetchpriority="high" />
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track" data-marquee>
+    <span><em data-i18n="mq.1">Delivery all over Lebanon</em><svg><use href="#daisy"/></svg><em data-i18n="mq.2">Imported from Turkey</em><svg><use href="#daisy"/></svg><em data-i18n="mq.3">Bridal trousseau in one place</em><svg><use href="#daisy"/></svg><em data-i18n="mq.4">Open daily 10:00 – 5:00</em><svg><use href="#daisy"/></svg><em>@sama_lingerie.lb</em><svg><use href="#daisy"/></svg></span>
+  </div>
+</div>
+
+<!-- ============ INTRO ============ -->
+<section class="intro" id="intro">
+  <div class="intro__grid">
+    <div class="intro__text">
+      <p class="eyebrow"><svg class="eyebrow__d"><use href="#daisy"/></svg><span data-i18n="intro.eyebrow">The boutique</span></p>
+      <h2 class="display reveal-words" data-i18n="intro.title">Soft things for real days.</h2>
+      <p class="lead scrub-words" data-i18n="intro.body">Sama is a little yellow boutique in Saida with a big idea: lingerie and loungewear that feel like you — warm, comfortable, a bit playful, and never out of reach. Every piece is imported from Turkey and picked for how it feels on an ordinary Tuesday.</p>
+      <div class="intro__facts">
+        <div class="fact"><b data-count="2025">2025</b><span data-i18n="intro.f1">founded in Saida</span></div>
+        <div class="fact"><b>TR</b><span data-i18n="intro.f2">imported from Turkey</span></div>
+        <div class="fact"><b>LB</b><span data-i18n="intro.f3">delivery everywhere</span></div>
+      </div>
+    </div>
+    <div class="intro__media">
+      <figure class="intro__img intro__img--a reveal-img" data-parallax="-0.2"><img src="https://images.pexels.com/photos/6625450/pexels-photo-6625450.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Cozy loungewear morning" loading="lazy" decoding="async" /></figure>
+      <figure class="intro__img intro__img--b reveal-img" data-parallax="0.18"><img src="https://images.pexels.com/photos/8793891/pexels-photo-8793891.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Satin and lace texture" loading="lazy" decoding="async" /></figure>
+      <figure class="intro__img intro__img--c reveal-img" data-parallax="-0.05"><img src="https://images.pexels.com/photos/36390799/pexels-photo-36390799.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="White daisies" loading="lazy" decoding="async" /></figure>
+      <svg class="intro__sticker spin" aria-hidden="true" viewBox="0 0 200 200">
+        <defs><path id="circ" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs>
+        <text class="sticker__text"><textPath href="#circ" data-i18n="intro.sticker">soft · playful · everyday · soft · playful · everyday · </textPath></text>
+        <svg x="70" y="70" width="60" height="60" class="sticker__d"><use href="#daisy"/></svg>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COLLECTIONS (PINNED HORIZONTAL) ============ -->
+<section class="hscroll" id="collections">
+  <div class="hscroll__pin">
+    <div class="hscroll__head">
+      <p class="eyebrow"><svg class="eyebrow__d"><use href="#daisy"/></svg><span data-i18n="col.eyebrow">Shop by collection</span></p>
+      <h2 class="display display--sm" data-i18n="col.title">Everything soft, in six shelves.</h2>
+      <div class="hscroll__progress"><i id="hProg"></i><svg id="hDaisy"><use href="#daisy"/></svg></div>
+    </div>
+    <div class="hscroll__track" id="hTrack">
+      <article class="ccard" data-cat="pajamas" tabindex="0" role="link"><div class="ccard__img"><img src="https://images.unsplash.com/photo-1768696082915-bdc6774f94c7?auto=format&fit=crop&w=800&q=80" alt="Pajama sets" loading="lazy" decoding="async" /></div><div class="ccard__meta"><span class="ccard__n">01</span><h3 data-i18n="col.1">Pajama sets</h3><p data-i18n="col.1d">Two-piece sets, shorts & long — cotton, satin, fleece.</p></div></article>
+      <article class="ccard" data-cat="lingerie" tabindex="0" role="link"><div class="ccard__img"><img src="https://images.pexels.com/photos/18530983/pexels-photo-18530983.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Lingerie sets" loading="lazy" decoding="async" /></div><div class="ccard__meta"><span class="ccard__n">02</span><h3 data-i18n="col.2">Lingerie sets</h3><p data-i18n="col.2d">Everyday bras & bralettes, soft lace, comfy fits.</p></div></article>
+      <article class="ccard" data-cat="lounge" tabindex="0" role="link"><div class="ccard__img"><img src="https://images.unsplash.com/photo-1759229874709-a8d0de083b91?auto=format&fit=crop&w=800&q=80" alt="Loungewear" loading="lazy" decoding="async" /></div><div class="ccard__meta"><span class="ccard__n">03</span><h3 data-i18n="col.3">Loungewear</h3><p data-i18n="col.3d">Sweat sets, ribbed basics and oversized tees for home days.</p></div></article>
+      <article class="ccard" data-cat="robes" tabindex="0" role="link"><div class="ccard__img"><img src="https://images.unsplash.com/photo-1766056278976-87f269e3b69c?auto=format&fit=crop&w=800&q=80" alt="Robes and kimonos" loading="lazy" decoding="async" /></div><div class="ccard__meta"><span class="ccard__n">04</span><h3 data-i18n="col.4">Robes & kimonos</h3><p data-i18n="col.4d">Satin, waffle and plush — the getting-ready essential.</p></div></article>
+      <article class="ccard ccard--gold" data-cat="bridal" tabindex="0" role="link"><div class="ccard__img"><img src="https://images.pexels.com/photos/34631585/pexels-photo-34631585.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Bridal boxes" loading="lazy" decoding="async" /></div><div class="ccard__meta"><span class="ccard__n">05</span><h3 data-i18n="col.5">Bridal boxes</h3><p data-i18n="col.5d">Curated trousseau sets, wrapped and ready to gift.</p></div></article>
+      <article class="ccard" data-cat="extras" tabindex="0" role="link"><div class="ccard__img"><img src="https://images.pexels.com/photos/5485119/pexels-photo-5485119.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Slippers and extras" loading="lazy" decoding="async" /></div><div class="ccard__meta"><span class="ccard__n">06</span><h3 data-i18n="col.6">Slippers & extras</h3><p data-i18n="col.6d">Fluffy slippers, scrunchies, sleep masks and little gifts.</p></div></article>
+      <a class="ccard ccard--cta" href="https://wa.me/96176910051" target="_blank" rel="noopener"><svg class="ccard__bigd"><use href="#daisy"/></svg><span data-i18n="col.cta">Ask us on WhatsApp</span><svg class="ccard__arrow"><use href="#arrow"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SHOP ============ -->
+<section class="shop" id="shop">
+  <div class="wrap">
+    <div class="shop__head">
+      <div>
+        <p class="eyebrow"><svg class="eyebrow__d"><use href="#daisy"/></svg><span data-s="shopEyebrow">Shop</span></p>
+        <h2 class="display display--sm" data-s="shopTitle">Pick your soft things.</h2>
+      </div>
+      <p class="shop__note" data-s="shopNote">Prices in USD · pay on delivery · order confirmed on WhatsApp</p>
+    </div>
+    <div class="chips" id="shopChips" role="tablist" aria-label="Categories"></div>
+    <div class="pgrid" id="shopGrid"></div>
+  </div>
+</section>
+
+<!-- ============ OFFERS ============ -->
+<section class="offers" id="offers">
+  <svg class="offers__bigdaisy spin" aria-hidden="true"><use href="#daisy"/></svg>
+  <div class="wrap offers__head">
+    <div>
+      <p class="eyebrow eyebrow--gold"><svg class="eyebrow__d"><use href="#daisy"/></svg><span data-s="offersEyebrow">Offers</span></p>
+      <h2 class="display display--sm" data-s="offersTitle">This week, a little sweeter.</h2>
+    </div>
+    <p class="offers__note" data-s="offersNote">Offers apply while stock lasts.</p>
+  </div>
+  <div class="offers__row" id="offersRow"></div>
+</section>
+
+<!-- ============ BRIDAL TROUSSEAU ============ -->
+<section class="bridal" id="bridal">
+  <div class="bridal__bgword" aria-hidden="true" data-i18n="br.bg">jihaz</div>
+  <div class="wrap bridal__grid">
+    <div class="bridal__sticky">
+      <p class="eyebrow eyebrow--gold"><svg class="eyebrow__d"><use href="#daisy"/></svg><span data-i18n="br.eyebrow">Brides-to-be</span></p>
+      <h2 class="display" data-i18n="br.title">Your jihaz, in one place.</h2>
+      <p class="lead" data-i18n="br.body">From the wedding night to honeymoon mornings, we help brides complete their trousseau without running from shop to shop. Tell us your date and sizes, and we curate the rest — wrapped, labelled, delivered.</p>
+      <a class="btn btn--gold magnetic" href="https://wa.me/96176910051?text=Hi%20Sama!%20I%27m%20a%20bride-to-be%20and%20I%27d%20like%20help%20with%20my%20trousseau." target="_blank" rel="noopener"><svg class="btn__ico"><use href="#wa"/></svg><span data-i18n="br.cta">Plan my trousseau</span></a>
+      <figure class="bridal__photo reveal-img" data-parallax="-0.08"><img src="https://images.pexels.com/photos/38614073/pexels-photo-38614073.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Bride getting ready in a satin robe" loading="lazy" decoding="async" /></figure>
+    </div>
+
+    <ol class="steps">
+      <li class="step">
+        <span class="step__n">01</span>
+        <div class="step__body">
+          <h3 data-i18n="br.s1">Tell us your date</h3>
+          <p data-i18n="br.s1d">Send us your wedding date, sizes and favourite colours on WhatsApp. We reply the same day.</p>
+        </div>
+        <figure class="step__img reveal-img"><img src="https://images.pexels.com/photos/6603658/pexels-photo-6603658.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="" loading="lazy" decoding="async" /></figure>
+      </li>
+      <li class="step">
+        <span class="step__n">02</span>
+        <div class="step__body">
+          <h3 data-i18n="br.s2">We curate your sets</h3>
+          <p data-i18n="br.s2d">Wedding-night set, honeymoon pajamas, a robe for getting ready, everyday sets for the first months.</p>
+        </div>
+        <figure class="step__img reveal-img"><img src="https://images.pexels.com/photos/8386651/pexels-photo-8386651.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="" loading="lazy" decoding="async" /></figure>
+      </li>
+      <li class="step">
+        <span class="step__n">03</span>
+        <div class="step__body">
+          <h3 data-i18n="br.s3">Try it on in Saida</h3>
+          <p data-i18n="br.s3d">Come by the boutique on Ghassan Hammoud Street, or we send photos and sizes if you're far.</p>
+        </div>
+        <figure class="step__img reveal-img"><img src="https://images.pexels.com/photos/34835231/pexels-photo-34835231.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="" loading="lazy" decoding="async" /></figure>
+      </li>
+      <li class="step">
+        <span class="step__n">04</span>
+        <div class="step__body">
+          <h3 data-i18n="br.s4">Wrapped &amp; delivered</h3>
+          <p data-i18n="br.s4d">Every box is wrapped with a daisy ribbon and delivered anywhere in Lebanon.</p>
+        </div>
+        <figure class="step__img reveal-img"><img src="https://images.unsplash.com/photo-1513201099705-a9746e1e201f?auto=format&fit=crop&w=1200&q=80" alt="" loading="lazy" decoding="async" /></figure>
+      </li>
+    </ol>
+  </div>
+
+  <div class="wrap">
+    <ul class="checklist" id="checklist">
+      <li><svg><use href="#daisy"/></svg><span data-i18n="br.c1">Wedding-night set</span></li>
+      <li><svg><use href="#daisy"/></svg><span data-i18n="br.c2">Honeymoon pajamas</span></li>
+      <li><svg><use href="#daisy"/></svg><span data-i18n="br.c3">Satin robe</span></li>
+      <li><svg><use href="#daisy"/></svg><span data-i18n="br.c4">Everyday sets</span></li>
+      <li><svg><use href="#daisy"/></svg><span data-i18n="br.c5">Loungewear</span></li>
+      <li><svg><use href="#daisy"/></svg><span data-i18n="br.c6">Slippers</span></li>
+      <li><svg><use href="#daisy"/></svg><span data-i18n="br.c7">Gift wrapping</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="about" id="about">
+  <div class="wrap about__grid">
+    <figure class="about__img reveal-img" data-parallax="-0.12" data-about="img">
+      <img src="https://images.pexels.com/photos/33270837/pexels-photo-33270837.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Sidon sea castle and the Mediterranean" loading="lazy" decoding="async" />
+      <figcaption data-about="cap">Saida, on the Mediterranean</figcaption>
+    </figure>
+    <div class="about__text">
+      <p class="eyebrow"><svg class="eyebrow__d"><use href="#daisy"/></svg><span data-i18n="ab.eyebrow">About</span></p>
+      <h2 class="display" data-about="title">Hello from Saida.</h2>
+      <p class="lead scrub-words" data-about="body">Sama opened in 2025 on Ghassan Hammoud Street, right opposite Al-Amir wal Amira bookstore. We import feminine everyday pieces from Turkey and keep them affordable, because feeling good at home shouldn't be a luxury. Warm, playful, approachable — that's the whole idea.</p>
+      <ul class="pillars">
+        <li><span class="pillar__ico"><svg><use href="#daisy"/></svg></span><b data-about="pillar-0-t">Affordable, always</b><span data-about="pillar-0-d">Boutique feel, everyday prices.</span></li>
+        <li><span class="pillar__ico"><svg><use href="#daisy"/></svg></span><b data-about="pillar-1-t">Imported from Turkey</b><span data-about="pillar-1-d">Soft fabrics, careful finishing.</span></li>
+        <li><span class="pillar__ico"><svg><use href="#daisy"/></svg></span><b data-about="pillar-2-t">Feminine &amp; everyday</b><span data-about="pillar-2-d">Made to be lived in, not saved for later.</span></li>
+        <li><span class="pillar__ico"><svg><use href="#daisy"/></svg></span><b data-about="pillar-3-t">Delivery all over Lebanon</b><span data-about="pillar-3-d">From Saida to your door.</span></li>
+      </ul>
+      <a class="btn btn--ghost-dark magnetic about__more" href="about.html"><span data-i18n="ab.more">Read our story</span><svg class="btn__ico btn__ico--end"><use href="#arrow"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+  <div class="wrap contact__grid">
+    <div class="contact__text">
+      <p class="eyebrow"><svg class="eyebrow__d"><use href="#daisy"/></svg><span data-i18n="ct.eyebrow">Visit or message</span></p>
+      <h2 class="display" data-i18n="ct.title">Come say hi.</h2>
+      <dl class="info">
+        <div><dt data-i18n="ct.addr">Address</dt><dd data-i18n="ct.addrv">Ghassan Hammoud Street, opposite Al-Amir wal Amira Bookstore, Saida, Lebanon</dd></div>
+        <div><dt data-i18n="ct.hours">Hours</dt><dd data-i18n="ct.hoursv">Daily 10:00 AM – 5:00 PM</dd></div>
+        <div><dt data-i18n="ct.phone">Phone & WhatsApp</dt><dd><a href="tel:+96176910051">+961 76 910 051</a></dd></div>
+        <div><dt>Instagram</dt><dd><a href="https://instagram.com/sama_lingerie.lb" target="_blank" rel="noopener">@sama_lingerie.lb</a></dd></div>
+        <div><dt data-i18n="ct.delivery">Delivery</dt><dd data-i18n="ct.deliveryv">All over Lebanon</dd></div>
+      </dl>
+      <div class="contact__cta">
+        <a class="btn btn--dark magnetic" href="https://wa.me/96176910051" target="_blank" rel="noopener"><svg class="btn__ico"><use href="#wa"/></svg><span data-i18n="ct.cta">Order on WhatsApp</span></a>
+        <a class="btn btn--ghost-dark magnetic" href="https://www.google.com/maps/search/?api=1&query=33.561752,35.373573" target="_blank" rel="noopener"><span data-i18n="ct.map">Open in Google Maps</span><svg class="btn__ico btn__ico--end"><use href="#arrow"/></svg></a>
+      </div>
+    </div>
+    <div class="contact__map reveal-img">
+      <iframe title="Sama Lingerie on Google Maps" src="https://www.google.com/maps?q=33.561752,35.373573&z=17&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      <div class="map__pin" aria-hidden="true"><svg><use href="#daisy"/></svg></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer__big" dir="ltr" aria-hidden="true"><img src="img/logo-white.png" alt="" width="1718" height="662" loading="lazy" decoding="async" /></div>
+  <div class="wrap footer__row">
+    <p class="footer__tag" data-i18n="ft.tag">Feminine everyday lingerie & loungewear · Saida, Lebanon</p>
+    <nav class="footer__links" aria-label="Footer">
+      <a href="#collections" data-i18n="nav.collections">Collections</a>
+      <a href="#bridal" data-i18n="nav.bridal">Bridal</a>
+      <a href="about.html" data-i18n="nav.about">About</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+      <a href="https://instagram.com/sama_lingerie.lb" target="_blank" rel="noopener">Instagram</a>
+    </nav>
+    <p class="footer__copy">© 2025 Sama Lingerie · <a class="footer__dev" href="https://arzware.net" target="_blank" rel="noopener"><span data-i18n="ft.dev">Developed by</span> Arzware</a></p>
+  </div>
+</footer>
+
+<!-- ============ FLOATING WHATSAPP + INSTAGRAM ============ -->
+<div class="floaters" id="floaters">
+  <a class="ig-float" href="https://instagram.com/sama_lingerie.lb" target="_blank" rel="noopener" aria-label="Instagram @sama_lingerie.lb">
+    <svg><use href="#ig"/></svg>
+    <span>@sama_lingerie.lb</span>
+  </a>
+  <a class="wa-float" id="waFloat" href="https://wa.me/96176910051" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg><use href="#wa"/></svg>
+    <span data-i18n="wa.label">Chat on WhatsApp</span>
+  </a>
+</div>
+
+<!-- ============ CART DRAWER ============ -->
+<div class="overlay" id="cartOverlay" data-cart-close></div>
+<aside class="cart" id="cart" aria-hidden="true" aria-label="Shopping bag">
+  <header class="cart__head">
+    <div><h3 class="cart__title" data-s="bag">Your bag</h3><span class="cart__count" id="cartCountLabel">0 items</span></div>
+    <button class="icon-btn" type="button" data-cart-close aria-label="Close">×</button>
+  </header>
+  <div class="cart__empty" id="cartEmpty">
+    <svg class="cart__emptyd"><use href="#daisy"/></svg>
+    <h4 data-s="empty">Your bag is empty</h4>
+    <p data-s="emptySub">Add a few soft things and order them on WhatsApp.</p>
+    <a class="btn btn--dark btn--sm" href="#shop" data-cart-close><span data-s="browse">Browse the shop</span></a>
+  </div>
+  <ul class="cart__items" id="cartItems" hidden></ul>
+  <footer class="cart__foot" id="cartFoot" hidden>
+    <div class="cart__line"><span data-s="subtotal">Subtotal</span><b id="cartSubtotal">$0</b></div>
+    <div class="cart__line cart__line--muted"><span data-s="delivery">Delivery</span><span data-s="deliveryNote">All over Lebanon · paid on delivery</span></div>
+    <button class="btn btn--dark btn--block" type="button" data-checkout-open><span data-s="checkout">Place order</span><svg class="btn__ico btn__ico--end"><use href="#arrow"/></svg></button>
+    <a class="cart__alt" id="cartWa" href="https://wa.me/96176910051" target="_blank" rel="noopener"><svg><use href="#wa"/></svg><span data-s="orChat">or chat with us on WhatsApp</span></a>
+    <button class="cart__clear" type="button" data-cart-clear data-s="clear">Clear bag</button>
+  </footer>
+
+  <!-- checkout: details + not-a-robot + confirm; replaces the item list while open -->
+  <form class="checkout" id="checkout" hidden novalidate>
+    <button class="checkout__back" type="button" data-checkout-close>‹ <span data-s="backToBag">Back to bag</span></button>
+    <h4 class="checkout__title" data-s="coTitle">Your details</h4>
+    <p class="checkout__sub" data-s="coSub">We confirm every order by WhatsApp before delivery. Payment on delivery.</p>
+    <label class="field"><span data-s="coName">Full name</span><input name="name" type="text" autocomplete="name" required maxlength="80" /></label>
+    <label class="field"><span data-s="coPhone">Phone (WhatsApp)</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="76 910 051" required maxlength="32" /></label>
+    <label class="field"><span data-s="coAddress">Delivery address</span><textarea name="address" rows="2" autocomplete="street-address" required maxlength="300" placeholder="Building, street, area, city"></textarea></label>
+    <label class="field"><span data-s="coNotes">Notes (optional)</span><textarea name="notes" rows="2" maxlength="500"></textarea></label>
+    <div class="hp" aria-hidden="true"><label>Website<input name="website" type="text" tabindex="-1" autocomplete="off" /></label></div>
+    <div class="robot" id="robot" role="checkbox" aria-checked="false" tabindex="0">
+      <span class="robot__box"><i class="robot__spin"></i><svg class="robot__tick" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <span class="robot__label" data-s="robot">I'm not a robot</span>
+      <svg class="robot__daisy" aria-hidden="true"><use href="#daisy"/></svg>
+    </div>
+    <p class="checkout__err" id="checkoutErr" role="alert" hidden></p>
+    <button class="btn btn--dark btn--block checkout__submit" id="checkoutSubmit" type="submit" disabled><span data-s="confirmOrder">Confirm order</span> · <b id="checkoutTotal">$0</b></button>
+  </form>
+
+  <div class="done" id="orderDone" hidden>
+    <svg class="done__daisy" aria-hidden="true"><use href="#daisy"/></svg>
+    <h4 data-s="doneTitle">Order received!</h4>
+    <p class="done__ref"><span data-s="doneRef">Order number</span> <b id="doneRef">SM-0000-0000</b></p>
+    <p data-s="doneSub">We'll message you on WhatsApp shortly to confirm the details and delivery time.</p>
+    <a class="btn btn--wa" id="doneWa" href="https://wa.me/96176910051" target="_blank" rel="noopener"><svg class="btn__ico"><use href="#wa"/></svg><span data-s="doneChat">Chat with us on WhatsApp</span></a>
+    <button class="btn btn--ghost-dark" type="button" data-cart-close data-s="doneBack">Continue shopping</button>
+  </div>
+</aside>
+
+<!-- ============ QUICK VIEW ============ -->
+<div class="overlay" id="quickOverlay" data-quick-close></div>
+<div class="quick" id="quick" aria-hidden="true" role="dialog" aria-label="Product">
+  <button class="icon-btn quick__x" type="button" data-quick-close aria-label="Close">×</button>
+  <div class="quick__body" id="quickBody"></div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<button class="cart-fab cart-btn" type="button" data-cart-open aria-label="Open bag">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M6 8h12l1 13H5L6 8z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M9 10V7a3 3 0 0 1 6 0v3"/></svg>
+  <b data-cart-count class="is-zero">0</b>
+</button>
+
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+<script src="main.js"></script>
+<script src="products.js"></script>
+<script src="shop.js"></script>
+</body>
+</html>

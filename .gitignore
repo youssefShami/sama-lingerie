@@ -1,0 +1,12 @@
+node_modules/
+dist-site/
+dist/
+.netlify/
+*.log
+.DS_Store
+Thumbs.db
+# private: dashboard password + notes, never commit
+ADMIN-ACCESS.md
+.env
+.env.*
+img/preview-*.jpg

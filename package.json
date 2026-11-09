@@ -1,0 +1,17 @@
+{
+  "name": "sama",
+  "version": "1.0.0",
+  "description": "Single-page, bilingual (EN / AR, RTL) site for Sama Lingerie, Saida, Lebanon. No build step: plain HTML + CSS + JS. GSAP 3 (ScrollTrigger) and Lenis are loaded from CDNs.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@netlify/blobs": "^8.2.0",
+    "@netlify/functions": "^3.1.10",
+    "@supabase/supabase-js": "^2.49.4"
+  }
+}
