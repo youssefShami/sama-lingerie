@@ -25,7 +25,7 @@ All text lives in the `T` dictionary at the top of `main.js` (keys like `hero.ta
 - `products.js` holds the catalogue: `CATS` (categories), `PRODUCTS` (id, cat, EN/AR name + description, price, optional `old` price, image, sizes, colours, optional `tag`: new / bestseller / bundle) and `DEALS` (static offer cards). Edit this file to change what the shop sells; everything else renders from it.
 - A product with an `old` price automatically shows a strike-through, a -% badge, and appears in the Offers row.
 - `shop.js` renders the category chips, product grid, offers row, quick view modal, the bag drawer and the WhatsApp checkout message. The bag is saved in `localStorage` (`sama-cart`).
-- Checkout: "Order on WhatsApp" opens wa.me/96176910051 with a pre-filled list of items (name, size, colour, qty, line total), the total and blank Name / Address / Notes lines. No payment is taken online; payment is on delivery.
+- Checkout: the bag opens a short form (name, phone, address, notes) with an "I'm not a robot" check; the order is saved via `/api/orders` and the shop confirms it from the dashboard's Orders page on WhatsApp. No payment is taken online; payment is on delivery.
 - `shop.css` styles these components.
 
 ## Photography
@@ -44,7 +44,8 @@ WhatsApp / phone +961 76 910 051 → https://wa.me/96176910051 · Instagram @sam
 - Settings: change password, export / import a JSON backup, reset to the seed data.
 - Photos are compressed in the browser before upload (max 1200 px WebP + a 480 px thumbnail used in grids), so phone photos end up at ~100–300 KB instead of several MB.
 
-## Backend (Netlify Functions + Netlify Blobs, free tier)
+## Backend (Netlify Functions + Supabase; Netlify Blobs as local fallback)
+- `netlify/functions/orders.mjs` — `GET /api/orders?challenge=1` (captcha), `POST /api/orders` (place order), `GET/PATCH /api/orders` (admin). `netlify/lib/db.mjs` — data layer: Supabase when `SUPABASE_URL` + `SUPABASE_SERVICE_KEY` are set, Netlify Blobs otherwise. `supabase/schema.sql` — tables, functions, storage bucket.
 - `netlify/functions/catalog.mjs` — `GET /api/catalog` (public, CDN-cached 20 s) / `PUT /api/catalog` (admin). The live catalogue lives in the `sama` blob store; `products.js` is only the seed / fallback.
 - `netlify/functions/upload.mjs` — `POST /api/upload` (admin) stores images in the `images` blob store; `netlify/functions/img.mjs` serves them at `/api/img/<key>` with a one-year cache.
 - `netlify/functions/auth.mjs` — login check, change password. The first password comes from the `SAMA_ADMIN_PASSWORD` environment variable; a password set from the dashboard is stored hashed in the `auth` store and takes precedence.

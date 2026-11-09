@@ -15,11 +15,23 @@ Everything below is what you need to take the site from "demo link" to a profess
 | Edge cache | Netlify Durable Cache, purged on every Save | Free |
 | Admin dashboard | `/admin/` | — |
 
-Why this stack and not a classic database server: the whole shop is one small JSON document plus images.
-Serving it from the CDN edge (≈10–30 ms anywhere in the world) is faster than any Postgres/MySQL query behind a
-server, and there is nothing to patch, scale or pay for. If the shop later needs orders, customers and reports,
-add Netlify DB (Neon Postgres, `npx netlify db init`) next to it; the dashboard code is organised so that only
-`netlify/functions/*.mjs` would change.
+### Database: Supabase (Postgres + Storage)
+The API talks to **Supabase** when two environment variables are set on the Netlify site; otherwise it falls back to Netlify Blobs (used for local development).
+
+| Table | Holds |
+|---|---|
+| `categories`, `products`, `deals`, `colors` | the catalogue the dashboard edits |
+| `settings` | About texts, dashboard password hash |
+| `orders` | every order placed on the site (name, phone, address, items, total, status) |
+| Storage bucket `images` | compressed product / about photos, served from Supabase's CDN |
+
+Setup (once):
+1. Supabase → SQL editor → paste `supabase/schema.sql` → Run. It creates the tables, the `get_catalog()` / `replace_catalog()` functions and the `images` bucket.
+2. Supabase → Project settings → API keys: copy the **Project URL** and the **service_role** key (secret, server-side only).
+3. Netlify → Site configuration → Environment variables: add `SUPABASE_URL` and `SUPABASE_SERVICE_KEY`. Redeploy.
+4. Open the dashboard, press **Save** once to write the catalogue into Postgres.
+
+Reads are still answered from Netlify's edge cache (purged on every Save), so the site stays as fast as a static page while the data lives in a real database with backups, SQL and row-level security (the public anon key has no access; only the API's service key does).
 
 ---
 
@@ -63,7 +75,15 @@ Suggested names, in order: `samalingerie.com`, `sama-lingerie.com`, `samalingeri
 
 ---
 
-## 5. Day-to-day: the dashboard
+## 5. Orders
+
+Customers check out on the site: bag → **Place order** → name, phone, address → **I'm not a robot** → **Confirm order**. The order is saved in the database with a number like `SM-2511-7F3K`, prices are recomputed server-side, and sold-out items are refused.
+
+In the dashboard → **Orders**: every order with its items, a **Send confirmation on WhatsApp** button (opens WhatsApp to the customer's number with a ready message in their language and marks the order confirmed), Mark delivered / Cancel, copy summary, search and filters. New orders show as a badge in the sidebar.
+
+The "I'm not a robot" check is a signed proof-of-work challenge plus a honeypot field and a minimum fill time: no third-party keys needed. If you ever want Cloudflare Turnstile or Google reCAPTCHA instead, both can be dropped into `netlify/functions/orders.mjs` in a few lines.
+
+## 6. Day-to-day: the dashboard
 
 - URL: `https://<your-domain>/admin/` — password in `ADMIN-ACCESS.md` (private). Change it in **Settings** on first login.
 - Products, categories, offers, about text and photos are all live the moment you press **Save**; the edge cache is purged automatically.
@@ -73,7 +93,7 @@ Suggested names, in order: `samalingerie.com`, `sama-lingerie.com`, `samalingeri
 
 ---
 
-## 6. Deploying changes to the code
+## 7. Deploying changes to the code
 
 From the project folder (Node 18+ installed):
 
@@ -90,19 +110,18 @@ npx -y netlify-cli@17.38.1 deploy --prod --dir dist-site
 `deploy-stage.mjs` copies only the public files into `dist-site/` (no `node_modules`, notes or scripts);
 functions are picked up from `netlify.toml`. Test locally first with `npx -y netlify-cli@17.38.1 dev` → http://localhost:8888.
 
-Optional: connect the folder to a GitHub repository and link it in Netlify (**Site configuration → Build & deploy → Link repository**);
-every push then deploys automatically with a preview URL per branch.
+The code also lives in GitHub: https://github.com/youssefShami/sama-lingerie. Push with `git push` from the project folder. To make every push deploy automatically, Netlify → **Site configuration → Build & deploy → Link repository** → pick the repo; build command: `node deploy-stage.mjs`, publish directory: `dist-site`.
 
 ---
 
-## 7. Limits and when to upgrade
+## 8. Limits and when to upgrade
 
 Netlify Free covers a boutique comfortably: 100 GB bandwidth, 125k function calls and 300 build minutes per month, Blobs and Durable Cache included.
 Reasons to move to **Netlify Pro** (≈ $19–20 / month): remove the "Powered by Netlify" badge on free sites, more bandwidth, password-protected previews, more team members.
 
 ---
 
-## 8. Go-live checklist
+## 9. Go-live checklist
 
 - [ ] Replace the placeholder products and stock photos in the dashboard with the real shoot (names EN/AR, prices, sizes, stock).
 - [ ] Rewrite the About text and story in the dashboard; upload the shop's own photos.
