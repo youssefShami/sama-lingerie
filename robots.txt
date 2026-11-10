@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/
 
-Sitemap: https://sama-lingerie.netlify.app/sitemap.xml
+Sitemap: https://sama-lingerie.pages.dev/sitemap.xml

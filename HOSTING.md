@@ -27,7 +27,7 @@ The API reads and writes **Supabase** through the secret key, which lives only i
 | `orders` | every order placed on the site (name, phone, address, items, total, status) |
 | Storage bucket `images` | compressed product / about photos, served from Supabase's CDN |
 
-`supabase/schema.sql` has already been run on the project (tables, functions, `images` bucket, row-level security). The public key has no access to anything; only the API's secret key does. Catalogue reads are cached at Cloudflare's edge for 60 s and dropped on every Save.
+Status: **live** at https://sama-lingerie.pages.dev with the catalogue in Postgres, orders and photo uploads verified. `supabase/schema.sql` has already been run on the project (tables, functions, `images` bucket, row-level security). The public key has no access to anything; only the API's secret key does. Catalogue reads are cached at Cloudflare's edge for 60 s and dropped on every Save.
 
 ---
 
@@ -55,7 +55,7 @@ Because the site is on Cloudflare, buying at **Cloudflare Registrar** is simples
 1. Cloudflare dashboard -> **Domain Registration -> Register Domains** -> search `samalingerie.com` (or `sama-lingerie.com`, `samalingerie.shop`) -> buy, auto-renew on.
 2. **Workers & Pages -> sama-lingerie -> Custom domains -> Set up a custom domain** -> enter the domain -> Cloudflare adds the DNS record itself -> **Activate**. Repeat for `www.samalingerie.com`. HTTPS is automatic.
 3. Optional: a Redirect Rule sending `www` to the bare domain.
-4. After it is live, replace `sama-lingerie.netlify.app` with your domain in `index.html`, `about.html` (canonical, og:url, og:image), `sitemap.xml`, `robots.txt`, `ADMIN-ACCESS.md`, then push.
+4. After it is live, replace `sama-lingerie.pages.dev` with your domain in `index.html`, `about.html` (canonical, og:url, og:image), `sitemap.xml`, `robots.txt`, `ADMIN-ACCESS.md`, then push.
 
 If you buy the domain elsewhere (Namecheap, Porkbun): either switch its nameservers to the two Cloudflare shows when you **Add a domain** (recommended), or add a `CNAME` for `@` and `www` pointing to `sama-lingerie.pages.dev`.
 
