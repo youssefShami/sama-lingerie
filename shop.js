@@ -44,7 +44,7 @@
       add: 'Add to bag', added: 'Added to bag', quick: 'Quick view', size: 'Size', color: 'Colour', qty: 'Quantity',
       bag: 'Your bag', empty: 'Your bag is empty', emptySub: 'Add a few soft things and order them on WhatsApp.', browse: 'Browse the shop',
       subtotal: 'Subtotal', delivery: 'Delivery', deliveryNote: 'All over Lebanon · paid on delivery', checkout: 'Place order', orChat: 'or chat with us on WhatsApp', clear: 'Clear bag', remove: 'Remove', close: 'Close',
-      backToBag: 'Back to bag', coTitle: 'Your details', coSub: 'We confirm every order by WhatsApp before delivery. Payment on delivery.', coName: 'Full name', coPhone: 'Phone (WhatsApp)', coAddress: 'Delivery address', coNotes: 'Notes (optional)', robot: "I'm not a robot", robotWorking: 'Checking…', robotOk: 'Verified', confirmOrder: 'Confirm order',
+      backToBag: 'Back to bag', coTitle: 'Your details', coSub: 'We confirm every order by WhatsApp before delivery. Payment on delivery.', coName: 'Full name', coPhone: 'Phone (WhatsApp)', coAddress: 'Delivery address', coNotes: 'Notes (optional)', robot: "I'm not a robot", robotWorking: 'Checking…', robotOk: 'Verified', confirmOrder: 'Confirm order', coEmail: 'Email (optional)', gsiLabel: 'Sign in with Google to confirm your order', gsiAs: 'Signed in as', errGoogle: 'Please sign in with Google to confirm your order.',
       doneTitle: 'Order received!', doneRef: 'Order number', doneSub: "We'll message you on WhatsApp shortly to confirm the details and delivery time.", doneChat: 'Chat with us on WhatsApp', doneBack: 'Continue shopping',
       errName: 'Please enter your name.', errPhone: 'Please enter a valid phone number.', errAddress: 'Please enter your delivery address.', errRobot: 'Please tick "I\'m not a robot" first.', errNet: 'Could not send the order. Check your connection and try again.', errStock: 'is sold out — please remove it from your bag.',
       offersEyebrow: 'Offers', offersTitle: 'This week, a little sweeter.', offersNote: 'Offers apply while stock lasts. Mention the offer on WhatsApp and we take care of the rest.',
@@ -58,7 +58,7 @@
       add: 'أضيفي إلى الحقيبة', added: 'أُضيف إلى الحقيبة', quick: 'عرض سريع', size: 'المقاس', color: 'اللون', qty: 'الكمية',
       bag: 'حقيبتك', empty: 'حقيبتك فارغة', emptySub: 'أضيفي بعض الأشياء الناعمة واطلبيها عبر واتساب.', browse: 'تصفّحي المتجر',
       subtotal: 'المجموع', delivery: 'التوصيل', deliveryNote: 'لكل لبنان · يُدفع عند الاستلام', checkout: 'إتمام الطلب', orChat: 'أو راسلينا على واتساب', clear: 'إفراغ الحقيبة', remove: 'إزالة', close: 'إغلاق',
-      backToBag: 'العودة إلى الحقيبة', coTitle: 'بياناتك', coSub: 'نؤكد كل طلب عبر واتساب قبل التوصيل. الدفع عند الاستلام.', coName: 'الاسم الكامل', coPhone: 'رقم الهاتف (واتساب)', coAddress: 'عنوان التوصيل', coNotes: 'ملاحظات (اختياري)', robot: 'أنا لست روبوتاً', robotWorking: 'جارٍ التحقق…', robotOk: 'تم التحقق', confirmOrder: 'تأكيد الطلب',
+      backToBag: 'العودة إلى الحقيبة', coTitle: 'بياناتك', coSub: 'نؤكد كل طلب عبر واتساب قبل التوصيل. الدفع عند الاستلام.', coName: 'الاسم الكامل', coPhone: 'رقم الهاتف (واتساب)', coAddress: 'عنوان التوصيل', coNotes: 'ملاحظات (اختياري)', robot: 'أنا لست روبوتاً', robotWorking: 'جارٍ التحقق…', robotOk: 'تم التحقق', confirmOrder: 'تأكيد الطلب', coEmail: 'البريد الإلكتروني (اختياري)', gsiLabel: 'سجّلي الدخول بحساب غوغل لتأكيد طلبك', gsiAs: 'مسجّلة باسم', errGoogle: 'يرجى تسجيل الدخول بحساب غوغل لتأكيد طلبك.',
       doneTitle: 'استلمنا طلبك!', doneRef: 'رقم الطلب', doneSub: 'سنراسلك على واتساب قريباً لتأكيد التفاصيل وموعد التوصيل.', doneChat: 'راسلينا على واتساب', doneBack: 'متابعة التسوّق',
       errName: 'يرجى إدخال اسمك.', errPhone: 'يرجى إدخال رقم هاتف صحيح.', errAddress: 'يرجى إدخال عنوان التوصيل.', errRobot: 'يرجى تفعيل "أنا لست روبوتاً" أولاً.', errNet: 'تعذّر إرسال الطلب. تحقّقي من الاتصال وحاولي مجدداً.', errStock: 'نفدت كميته — يرجى إزالته من الحقيبة.',
       offersEyebrow: 'العروض', offersTitle: 'هذا الأسبوع، أحلى بقليل.', offersNote: 'العروض سارية حتى نفاد الكمية. اذكري العرض عبر واتساب ونهتم نحن بالباقي.',
@@ -278,6 +278,36 @@
   /* ---------------- checkout (orders API + not-a-robot proof of work) ---------------- */
   const co = $('#checkout'), done = $('#orderDone'), robot = $('#robot'), coErr = $('#checkoutErr'), coSubmit = $('#checkoutSubmit');
   let captcha = null, robotBusy = false, coStarted = 0;
+  let googleToken = null, googleEmail = '', googleClientId = null;
+  const gsi = $('#gsi');
+
+  // Google sign-in: shown only when the site has a client id configured (GET /api/config).
+  async function setupGoogle() {
+    if (!gsi) return;
+    try {
+      const r = await fetch('/api/config'); const c = r.ok ? await r.json() : {};
+      googleClientId = c.googleClientId || null;
+    } catch (e) { googleClientId = null; }
+    if (!googleClientId) return;
+    let tries = 0;
+    const render = () => {
+      if (!(window.google && google.accounts && google.accounts.id)) { if (tries++ < 40) setTimeout(render, 250); return; }
+      google.accounts.id.initialize({ client_id: googleClientId, callback: onGoogle, auto_select: false, itp_support: true });
+      google.accounts.id.renderButton($('#gsiBtn'), { theme: 'outline', size: 'large', shape: 'pill', width: 300, text: 'signin_with', locale: lang() === 'ar' ? 'ar' : 'en' });
+      gsi.hidden = false; if (robot) robot.hidden = true; const ef = $('#emailField'); if (ef) ef.hidden = true;
+    };
+    render();
+  }
+  function onGoogle(resp) {
+    try {
+      const payload = JSON.parse(atob(resp.credential.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
+      googleToken = resp.credential; googleEmail = payload.email || '';
+      $('#gsiEmail').textContent = googleEmail; $('#gsiDone').hidden = false; gsi.classList.add('is-ok');
+      if (co && payload.name && !co.elements.name.value) co.elements.name.value = payload.name;
+      coSubmit.disabled = false; coErr.hidden = true;
+    } catch (e) { googleToken = null; }
+  }
+  setupGoogle();
 
   function showBag() {
     if (!drawer) return;
@@ -299,7 +329,7 @@
     if (!robot) return;
     robot.classList.remove('is-ok', 'is-working', 'is-bad'); robot.setAttribute('aria-checked', 'false');
     robot.querySelector('.robot__label').textContent = t('robot');
-    coSubmit.disabled = true;
+    coSubmit.disabled = !(googleClientId && googleToken);
   }
 
   // compact SHA-256 (hex) for the proof-of-work; ~1 µs per hash, so 15 bits ≈ 30 ms of work
@@ -360,15 +390,17 @@
     if (name.length < 2) { bad('name', 1); return showErr(t('errName')); }
     if (phone.replace(/\D/g, '').length < 7) { bad('phone', 1); return showErr(t('errPhone')); }
     if (address.length < 6) { bad('address', 1); return showErr(t('errAddress')); }
-    if (!captcha) { robot.classList.add('is-bad'); return showErr(t('errRobot')); }
+    if (googleClientId && !googleToken) return showErr(t('errGoogle'));
+    if (!googleClientId && !captcha) { robot.classList.add('is-bad'); return showErr(t('errRobot')); }
     coErr.hidden = true; coSubmit.classList.add('is-busy');
     const items = cart.filter(lineOk).map(l => ({ id: l.id, size: l.size, color: l.color, qty: l.qty }));
     try {
-      const r = await fetch('/api/orders', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name, phone, address, notes, lang: lang(), items, captcha, started: coStarted, website: f.website.value }) });
+      const r = await fetch('/api/orders', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name, phone, address, notes, email: googleEmail || (f.email ? f.email.value.trim() : ''), google_token: googleToken, lang: lang(), items, captcha, started: coStarted, website: f.website.value }) });
       const data = await r.json().catch(() => ({}));
       coSubmit.classList.remove('is-busy');
       if (!r.ok) {
         if (data.code === 'captcha') { resetRobot(); return showErr(t('errRobot')); }
+        if (data.code === 'google') { googleToken = null; gsi.classList.remove('is-ok'); $('#gsiDone').hidden = true; return showErr(t('errGoogle')); }
         if (r.status === 409 && data.id) { const p = byId(data.id); return showErr(`${p ? name(p) : ''} ${t('errStock')}`); }
         if (data.field && f[data.field]) bad(data.field, 1);
         return showErr(data.error ? `${t('errNet')}` : t('errNet'));

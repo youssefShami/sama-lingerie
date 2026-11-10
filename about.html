@@ -122,8 +122,8 @@
       </div>
     </div>
     <div class="page__media">
-      <figure class="reveal-img" data-parallax="-0.08" data-about="img"><img src="https://images.pexels.com/photos/33270837/pexels-photo-33270837.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Saida on the Mediterranean" loading="eager" decoding="async" /></figure>
-      <figure class="reveal-img" data-parallax="0.06" data-about="img2"><img src="https://images.pexels.com/photos/6625450/pexels-photo-6625450.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Soft loungewear" loading="lazy" decoding="async" /></figure>
+      <figure class="reveal-img" data-parallax="-0.08" data-about="img"><img src="img/photos/33270837-900.webp" alt="Saida on the Mediterranean" loading="eager" decoding="async" /></figure>
+      <figure class="reveal-img" data-parallax="0.06" data-about="img2"><img src="img/photos/6625450-900.webp" alt="Soft loungewear" loading="lazy" decoding="async" /></figure>
     </div>
   </div>
 </section>
@@ -218,8 +218,14 @@
     <label class="field"><span data-s="coName">Full name</span><input name="name" type="text" autocomplete="name" required maxlength="80" /></label>
     <label class="field"><span data-s="coPhone">Phone (WhatsApp)</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="76 910 051" required maxlength="32" /></label>
     <label class="field"><span data-s="coAddress">Delivery address</span><textarea name="address" rows="2" autocomplete="street-address" required maxlength="300" placeholder="Building, street, area, city"></textarea></label>
+    <label class="field" id="emailField"><span data-s="coEmail">Email (optional)</span><input name="email" type="email" inputmode="email" autocomplete="email" maxlength="120" /></label>
     <label class="field"><span data-s="coNotes">Notes (optional)</span><textarea name="notes" rows="2" maxlength="500"></textarea></label>
     <div class="hp" aria-hidden="true"><label>Website<input name="website" type="text" tabindex="-1" autocomplete="off" /></label></div>
+    <div class="gsi" id="gsi" hidden>
+      <p class="gsi__label" data-s="gsiLabel">Sign in with Google to confirm your order</p>
+      <div class="gsi__btn" id="gsiBtn"></div>
+      <p class="gsi__done" id="gsiDone" hidden><svg aria-hidden="true" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-s="gsiAs">Signed in as</span> <b id="gsiEmail"></b></p>
+    </div>
     <div class="robot" id="robot" role="checkbox" aria-checked="false" tabindex="0">
       <span class="robot__box"><i class="robot__spin"></i><svg class="robot__tick" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
       <span class="robot__label" data-s="robot">I'm not a robot</span>
@@ -258,6 +264,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <script src="main.js"></script>
 <script src="products.js"></script>
 <script src="shop.js"></script>

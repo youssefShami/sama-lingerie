@@ -74,6 +74,12 @@ In the dashboard → **Orders**: every order with its items, a **Send confirmati
 
 The "I'm not a robot" check is a signed proof-of-work challenge plus a honeypot field and a minimum fill time: no third-party keys needed. If you ever want Cloudflare Turnstile or Google reCAPTCHA instead, both can be dropped into `netlify/functions/orders.mjs` in a few lines.
 
+### Sign in with Google at checkout (optional, free)
+When a Google client id is configured, the checkout shows a **Sign in with Google** button instead of the "not a robot" check, and the customer's verified Google email is saved with the order (shown on the Orders page). Setup, about 5 minutes:
+1. https://console.cloud.google.com → create a project (e.g. "Sama Lingerie") → **APIs & Services → OAuth consent screen** → External → app name "Sama Lingerie", your email → Save (no scopes needed) → Publish app.
+2. **APIs & Services → Credentials → Create credentials → OAuth client ID** → Web application. Authorized JavaScript origins: `https://sama-lingerie.pages.dev` and later `https://<your-domain>`. Create.
+3. Copy the **Client ID** (ends with `.apps.googleusercontent.com`) into `wrangler.toml` → `GOOGLE_CLIENT_ID = "..."` → commit and push. Until then the checkout keeps the "not a robot" check and an optional email field.
+
 ## 6. Day-to-day: the dashboard
 
 - URL: `https://<your-domain>/admin/` (or `https://sama-lingerie.pages.dev/admin/`), password in `ADMIN-ACCESS.md` (private). Change it in **Settings** on first login.

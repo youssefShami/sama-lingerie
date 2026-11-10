@@ -27,8 +27,21 @@ export async function onRequestPost({ request, env }) {
   let b; try { b = await request.json(); } catch { return json({ error: 'invalid JSON' }, 400); }
   if (b.website) return json({ error: 'rejected' }, 400);                                   // honeypot
   if (Number(b.started) && Date.now() - Number(b.started) < 2500) return json({ error: 'too fast' }, 400);
-  const capErr = await verifyChallenge(env, b.captcha || {});
-  if (capErr) return json({ error: capErr, code: 'captcha' }, 400);
+  // Identity: a verified Google sign-in, or the "not a robot" challenge.
+  let google = null;
+  if (b.google_token && env.GOOGLE_CLIENT_ID) {
+    try {
+      const r = await fetch('https://oauth2.googleapis.com/tokeninfo?id_token=' + encodeURIComponent(String(b.google_token)));
+      const info = r.ok ? await r.json() : null;
+      if (info && info.aud === env.GOOGLE_CLIENT_ID && info.email && info.email_verified === 'true' && Number(info.exp) * 1000 > Date.now()) {
+        google = { email: info.email.toLowerCase(), sub: info.sub, name: info.name || '' };
+      }
+    } catch (e) { google = null; }
+    if (!google) return json({ error: 'google sign-in could not be verified, please sign in again', code: 'google' }, 400);
+  } else {
+    const capErr = await verifyChallenge(env, b.captcha || {});
+    if (capErr) return json({ error: capErr, code: 'captcha' }, 400);
+  }
 
   const name = clean(b.name, 80), phone = clean(b.phone, 32).replace(/[^\d+ ]/g, ''), address = clean(b.address, 300), notes = clean(b.notes, 500);
   const lang = b.lang === 'ar' ? 'ar' : 'en';
@@ -54,7 +67,9 @@ export async function onRequestPost({ request, env }) {
 
   const row = {
     status: 'new', name, phone, address, notes, lang, items, total,
-    captcha_seed: b.captcha.seed,
+    email: google ? google.email : (clean(b.email, 120).toLowerCase() || null),
+    google_sub: google ? google.sub : null,
+    captcha_seed: google ? null : b.captcha.seed,
     ip: request.headers.get('cf-connecting-ip') || null,
     ua: clean(request.headers.get('user-agent'), 200) || null
   };

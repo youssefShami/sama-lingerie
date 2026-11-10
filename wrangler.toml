@@ -14,3 +14,5 @@ pages_build_output_dir = "dist-site"
 # secrets (SUPABASE_SERVICE_KEY, SAMA_ADMIN_PASSWORD) are set in the dashboard as encrypted Secrets.
 [vars]
 SUPABASE_URL = "https://fjxywdmrqnlydusaoywj.supabase.co"
+# Google "Sign in with Google" OAuth client id (public). Leave empty to use the "not a robot" check instead.
+GOOGLE_CLIENT_ID = ""
