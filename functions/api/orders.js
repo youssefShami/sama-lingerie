@@ -27,7 +27,22 @@ export async function onRequestPost({ request, env }) {
   let b; try { b = await request.json(); } catch { return json({ error: 'invalid JSON' }, 400); }
   if (b.website) return json({ error: 'rejected' }, 400);                                   // honeypot
   if (Number(b.started) && Date.now() - Number(b.started) < 2500) return json({ error: 'too fast' }, 400);
-  // Identity: a verified Google sign-in, or the "not a robot" challenge.
+  // Phone verification (Firebase Phone Auth): required whenever the site is configured for it.
+  let verifiedPhone = null;
+  if (env.FIREBASE_API_KEY) {
+    if (!b.phone_token) return json({ error: 'phone verification required', code: 'phone' }, 400);
+    try {
+      const r = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${env.FIREBASE_API_KEY}`, {
+        method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ idToken: String(b.phone_token) })
+      });
+      const info = r.ok ? await r.json() : null;
+      const u = info && info.users && info.users[0];
+      if (u && u.phoneNumber) verifiedPhone = u.phoneNumber;
+    } catch (e) { verifiedPhone = null; }
+    if (!verifiedPhone) return json({ error: 'phone verification failed', code: 'phone' }, 400);
+  }
+
+  // Identity: a verified Google sign-in, or the "not a robot" challenge (skipped when the phone was verified by SMS).
   let google = null;
   if (b.google_token && env.GOOGLE_CLIENT_ID) {
     try {
@@ -38,12 +53,12 @@ export async function onRequestPost({ request, env }) {
       }
     } catch (e) { google = null; }
     if (!google) return json({ error: 'google sign-in could not be verified, please sign in again', code: 'google' }, 400);
-  } else {
+  } else if (!verifiedPhone) {
     const capErr = await verifyChallenge(env, b.captcha || {});
     if (capErr) return json({ error: capErr, code: 'captcha' }, 400);
   }
 
-  const name = clean(b.name, 80), phone = clean(b.phone, 32).replace(/[^\d+ ]/g, ''), address = clean(b.address, 300), notes = clean(b.notes, 500);
+  const name = clean(b.name, 80), phone = verifiedPhone || clean(b.phone, 32).replace(/[^\d+ ]/g, ''), address = clean(b.address, 300), notes = clean(b.notes, 500);
   const lang = b.lang === 'ar' ? 'ar' : 'en';
   if (name.length < 2) return json({ error: 'name required', field: 'name' }, 400);
   if (phone.replace(/\D/g, '').length < 7) return json({ error: 'valid phone required', field: 'phone' }, 400);
@@ -69,7 +84,8 @@ export async function onRequestPost({ request, env }) {
     status: 'new', name, phone, address, notes, lang, items, total,
     email: google ? google.email : (clean(b.email, 120).toLowerCase() || null),
     google_sub: google ? google.sub : null,
-    captcha_seed: google ? null : b.captcha.seed,
+    phone_verified: !!verifiedPhone,
+    captcha_seed: (google || verifiedPhone) ? null : b.captcha.seed,
     ip: request.headers.get('cf-connecting-ip') || null,
     ua: clean(request.headers.get('user-agent'), 200) || null
   };

@@ -159,3 +159,7 @@ $$;
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
 values ('images', 'images', true, 5242880, array['image/webp','image/jpeg','image/png','image/avif'])
 on conflict (id) do update set public = true, file_size_limit = 5242880, allowed_mime_types = array['image/webp','image/jpeg','image/png','image/avif'];
+
+-- added later: customer identity on orders
+alter table orders add column if not exists email text, add column if not exists google_sub text, add column if not exists phone_verified boolean not null default false;
+create index if not exists orders_email_idx on orders(email);

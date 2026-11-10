@@ -346,3 +346,4 @@ svg{display:inline-block;width:1.15em;height:1.15em;fill:none;stroke:currentColo
 }
 
 .via-google{font-style:normal;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:rgba(66,133,244,.12);color:#1a56c4;padding:.15em .5em;border-radius:999px;margin-left:.4em}
+.via-sms{background:rgba(31,122,63,.12);color:#1f7a3f}

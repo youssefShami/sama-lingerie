@@ -274,3 +274,21 @@ html[dir="rtl"] .field{letter-spacing:0;font-size:.85rem}
 .gsi__done svg{width:18px;height:18px;color:#fff;background:var(--ink);border-radius:50%;padding:3px;flex:none}
 .gsi.is-ok .gsi__btn,.gsi.is-ok .gsi__label{display:none}
 .robot[hidden]{display:none}
+
+/* ---------- Phone verification (SMS code) ---------- */
+.phone-row{display:flex;gap:.5rem;align-items:stretch}
+.phone-row input{flex:1;min-width:0}
+.phone-send,.otp .btn{flex:none;align-self:stretch;letter-spacing:0;text-transform:none}
+.phone-send[hidden]{display:none}
+.phone-send.is-busy,.otp .btn.is-busy{opacity:.6;pointer-events:none}
+.otp{display:grid;gap:.5rem;background:var(--white);border:1.5px solid var(--yellow);border-radius:var(--r-md);padding:.9rem 1rem}
+.otp[hidden]{display:none}
+.otp input{letter-spacing:.35em;font-weight:700;font-size:1.15rem;text-align:center}
+.otp__resend{justify-self:start;font-size:.8rem;font-weight:600;color:var(--ink-soft);padding:.2em 0}
+.otp__resend:hover{color:var(--ink)}
+.otp__resend[disabled]{opacity:.5;cursor:default}
+.phone-ok{display:flex;align-items:center;gap:.5em;font-size:.9rem;font-weight:600;color:#1f7a3f}
+.phone-ok[hidden]{display:none}
+.phone-ok svg{width:18px;height:18px;color:#fff;background:#1f7a3f;border-radius:50%;padding:3px;flex:none}
+.field.is-verified input{border-color:#1f7a3f;background:#f3faf5}
+.grecaptcha-badge{visibility:hidden}

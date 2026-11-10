@@ -926,7 +926,7 @@
         <div class="ocard__grid">
           <div class="ocard__cust">
             <b>${esc(o.name)}</b>
-            <span class="line"><svg><use href="#i-phone"/></svg><a href="tel:+${esc(waDigits(o.phone))}">${esc(o.phone)}</a></span>
+            <span class="line"><svg><use href="#i-phone"/></svg><a href="tel:+${esc(waDigits(o.phone))}">${esc(o.phone)}</a>${o.phone_verified ? ' <em class="via-google via-sms">Verified</em>' : ''}</span>
             ${o.email ? `<span class="line"><svg><use href="#i-mail"/></svg><a href="mailto:${esc(o.email)}">${esc(o.email)}</a>${o.google_sub ? ' <em class="via-google">Google</em>' : ''}</span>` : ''}
             <span class="line"><svg><use href="#i-pin"/></svg><span>${esc(o.address)}</span></span>
             ${o.notes ? `<div class="ocard__notes"><b>Notes:</b> ${esc(o.notes)}</div>` : ''}

@@ -80,6 +80,12 @@ When a Google client id is configured, the checkout shows a **Sign in with Googl
 2. **APIs & Services → Credentials → Create credentials → OAuth client ID** → Web application. Authorized JavaScript origins: `https://sama-lingerie.pages.dev` and later `https://<your-domain>`. Create.
 3. Copy the **Client ID** (ends with `.apps.googleusercontent.com`) into `wrangler.toml` → `GOOGLE_CLIENT_ID = "..."` → commit and push. Until then the checkout keeps the "not a robot" check and an optional email field.
 
+### Phone number verification by SMS (free, Firebase)
+When Firebase is configured, the checkout asks the customer to **Send code**, an SMS with a 6-digit code arrives, and the order is only accepted with a verified number (`Verified` badge on the Orders page). Google's Firebase sends the SMS; the free Spark plan includes 10,000 verifications a month.
+1. https://console.firebase.google.com → Add project (name "Sama Lingerie", Analytics off) → Build → **Authentication → Get started → Sign-in method → Phone → Enable**.
+2. **Authentication → Settings → Authorized domains** → add `sama-lingerie.pages.dev` and later your domain.
+3. Project settings (gear) → **Your apps → Web app (</>)** → register "sama-site" → copy `apiKey`, `authDomain`, `projectId` into `wrangler.toml` (`FIREBASE_API_KEY`, `FIREBASE_AUTH_DOMAIN`, `FIREBASE_PROJECT_ID`) → commit and push.
+
 ## 6. Day-to-day: the dashboard
 
 - URL: `https://<your-domain>/admin/` (or `https://sama-lingerie.pages.dev/admin/`), password in `ADMIN-ACCESS.md` (private). Change it in **Settings** on first login.

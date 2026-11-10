@@ -44,7 +44,7 @@
       add: 'Add to bag', added: 'Added to bag', quick: 'Quick view', size: 'Size', color: 'Colour', qty: 'Quantity',
       bag: 'Your bag', empty: 'Your bag is empty', emptySub: 'Add a few soft things and order them on WhatsApp.', browse: 'Browse the shop',
       subtotal: 'Subtotal', delivery: 'Delivery', deliveryNote: 'All over Lebanon · paid on delivery', checkout: 'Place order', orChat: 'or chat with us on WhatsApp', clear: 'Clear bag', remove: 'Remove', close: 'Close',
-      backToBag: 'Back to bag', coTitle: 'Your details', coSub: 'We confirm every order by WhatsApp before delivery. Payment on delivery.', coName: 'Full name', coPhone: 'Phone (WhatsApp)', coAddress: 'Delivery address', coNotes: 'Notes (optional)', robot: "I'm not a robot", robotWorking: 'Checking…', robotOk: 'Verified', confirmOrder: 'Confirm order', coEmail: 'Email (optional)', gsiLabel: 'Sign in with Google to confirm your order', gsiAs: 'Signed in as', errGoogle: 'Please sign in with Google to confirm your order.',
+      backToBag: 'Back to bag', coTitle: 'Your details', coSub: 'We confirm every order by WhatsApp before delivery. Payment on delivery.', coName: 'Full name', coPhone: 'Phone (WhatsApp)', coAddress: 'Delivery address', coNotes: 'Notes (optional)', robot: "I'm not a robot", robotWorking: 'Checking…', robotOk: 'Verified', confirmOrder: 'Confirm order', coEmail: 'Email (optional)', sendCode: 'Send code', sending: 'Sending…', otpLabel: 'Enter the 6-digit code we sent by SMS', verify: 'Verify', resend: 'Resend code', phoneVerified: 'Phone number verified', errOtp: 'That code is not right, try again.', errSms: 'Could not send the SMS. Check the number and try again.', errPhoneVerify: 'Please verify your phone number first.', errPhoneChanged: 'The number changed, please verify it again.', gsiLabel: 'Sign in with Google to confirm your order', gsiAs: 'Signed in as', errGoogle: 'Please sign in with Google to confirm your order.',
       doneTitle: 'Order received!', doneRef: 'Order number', doneSub: "We'll message you on WhatsApp shortly to confirm the details and delivery time.", doneChat: 'Chat with us on WhatsApp', doneBack: 'Continue shopping',
       errName: 'Please enter your name.', errPhone: 'Please enter a valid phone number.', errAddress: 'Please enter your delivery address.', errRobot: 'Please tick "I\'m not a robot" first.', errNet: 'Could not send the order. Check your connection and try again.', errStock: 'is sold out — please remove it from your bag.',
       offersEyebrow: 'Offers', offersTitle: 'This week, a little sweeter.', offersNote: 'Offers apply while stock lasts. Mention the offer on WhatsApp and we take care of the rest.',
@@ -58,7 +58,7 @@
       add: 'أضيفي إلى الحقيبة', added: 'أُضيف إلى الحقيبة', quick: 'عرض سريع', size: 'المقاس', color: 'اللون', qty: 'الكمية',
       bag: 'حقيبتك', empty: 'حقيبتك فارغة', emptySub: 'أضيفي بعض الأشياء الناعمة واطلبيها عبر واتساب.', browse: 'تصفّحي المتجر',
       subtotal: 'المجموع', delivery: 'التوصيل', deliveryNote: 'لكل لبنان · يُدفع عند الاستلام', checkout: 'إتمام الطلب', orChat: 'أو راسلينا على واتساب', clear: 'إفراغ الحقيبة', remove: 'إزالة', close: 'إغلاق',
-      backToBag: 'العودة إلى الحقيبة', coTitle: 'بياناتك', coSub: 'نؤكد كل طلب عبر واتساب قبل التوصيل. الدفع عند الاستلام.', coName: 'الاسم الكامل', coPhone: 'رقم الهاتف (واتساب)', coAddress: 'عنوان التوصيل', coNotes: 'ملاحظات (اختياري)', robot: 'أنا لست روبوتاً', robotWorking: 'جارٍ التحقق…', robotOk: 'تم التحقق', confirmOrder: 'تأكيد الطلب', coEmail: 'البريد الإلكتروني (اختياري)', gsiLabel: 'سجّلي الدخول بحساب غوغل لتأكيد طلبك', gsiAs: 'مسجّلة باسم', errGoogle: 'يرجى تسجيل الدخول بحساب غوغل لتأكيد طلبك.',
+      backToBag: 'العودة إلى الحقيبة', coTitle: 'بياناتك', coSub: 'نؤكد كل طلب عبر واتساب قبل التوصيل. الدفع عند الاستلام.', coName: 'الاسم الكامل', coPhone: 'رقم الهاتف (واتساب)', coAddress: 'عنوان التوصيل', coNotes: 'ملاحظات (اختياري)', robot: 'أنا لست روبوتاً', robotWorking: 'جارٍ التحقق…', robotOk: 'تم التحقق', confirmOrder: 'تأكيد الطلب', coEmail: 'البريد الإلكتروني (اختياري)', sendCode: 'أرسلي الرمز', sending: 'جارٍ الإرسال…', otpLabel: 'أدخلي الرمز المكوّن من ٦ أرقام الذي وصلك برسالة SMS', verify: 'تحقّق', resend: 'إعادة الإرسال', phoneVerified: 'تم التحقق من رقم الهاتف', errOtp: 'الرمز غير صحيح، حاولي مجدداً.', errSms: 'تعذّر إرسال الرسالة. تحقّقي من الرقم وحاولي مجدداً.', errPhoneVerify: 'يرجى التحقق من رقم هاتفك أولاً.', errPhoneChanged: 'تغيّر الرقم، يرجى التحقق منه مجدداً.', gsiLabel: 'سجّلي الدخول بحساب غوغل لتأكيد طلبك', gsiAs: 'مسجّلة باسم', errGoogle: 'يرجى تسجيل الدخول بحساب غوغل لتأكيد طلبك.',
       doneTitle: 'استلمنا طلبك!', doneRef: 'رقم الطلب', doneSub: 'سنراسلك على واتساب قريباً لتأكيد التفاصيل وموعد التوصيل.', doneChat: 'راسلينا على واتساب', doneBack: 'متابعة التسوّق',
       errName: 'يرجى إدخال اسمك.', errPhone: 'يرجى إدخال رقم هاتف صحيح.', errAddress: 'يرجى إدخال عنوان التوصيل.', errRobot: 'يرجى تفعيل "أنا لست روبوتاً" أولاً.', errNet: 'تعذّر إرسال الطلب. تحقّقي من الاتصال وحاولي مجدداً.', errStock: 'نفدت كميته — يرجى إزالته من الحقيبة.',
       offersEyebrow: 'العروض', offersTitle: 'هذا الأسبوع، أحلى بقليل.', offersNote: 'العروض سارية حتى نفاد الكمية. اذكري العرض عبر واتساب ونهتم نحن بالباقي.',
@@ -279,6 +279,67 @@
   const co = $('#checkout'), done = $('#orderDone'), robot = $('#robot'), coErr = $('#checkoutErr'), coSubmit = $('#checkoutSubmit');
   let captcha = null, robotBusy = false, coStarted = 0;
   let googleToken = null, googleEmail = '', googleClientId = null;
+  let fb = null, phoneToken = null, phoneVerifiedFor = '', confirmation = null, recaptcha = null;
+  const phoneSend = $('#phoneSend'), otpBox = $('#otp'), otpVerify = $('#otpVerify'), otpResend = $('#otpResend'), phoneOk = $('#phoneOk');
+
+  // Lebanese numbers typed locally (76 910 051, 03 123456) -> E.164 (+96176910051)
+  function e164(raw) {
+    let d = String(raw || '').replace(/[^\d+]/g, '');
+    if (d.startsWith('+')) return d;
+    if (d.startsWith('00')) return '+' + d.slice(2);
+    if (d.startsWith('961')) return '+' + d;
+    if (d.startsWith('0')) d = d.slice(1);
+    return '+961' + d;
+  }
+  function setPhoneVerified(on) {
+    const f = co.elements.phone.closest('.field');
+    f && f.classList.toggle('is-verified', on);
+    if (phoneOk) phoneOk.hidden = !on;
+    if (phoneSend) phoneSend.hidden = on || !fb;
+    if (otpBox) otpBox.hidden = true;
+    if (fb) coSubmit.disabled = !on;
+  }
+  async function setupPhone(cfg) {
+    if (!phoneSend || !cfg || !cfg.firebaseApiKey || !window.firebase) return;
+    try {
+      fb = firebase.apps.length ? firebase.app() : firebase.initializeApp({ apiKey: cfg.firebaseApiKey, authDomain: cfg.firebaseAuthDomain, projectId: cfg.firebaseProjectId });
+      firebase.auth().languageCode = lang();
+      recaptcha = new firebase.auth.RecaptchaVerifier('recaptchaHost', { size: 'invisible' });
+    } catch (e) { fb = null; return; }
+    phoneSend.hidden = false; if (robot) robot.hidden = true;
+    coSubmit.disabled = true;
+    co.elements.phone.addEventListener('input', () => { if (phoneToken && e164(co.elements.phone.value) !== phoneVerifiedFor) { phoneToken = null; setPhoneVerified(false); } });
+    const send = async () => {
+      const num = e164(co.elements.phone.value);
+      if (num.replace(/\D/g, '').length < 10) { bad('phone', 1); return showErr(t('errPhone')); }
+      bad('phone', 0); coErr.hidden = true;
+      phoneSend.classList.add('is-busy'); phoneSend.querySelector('span').textContent = t('sending');
+      try {
+        confirmation = await firebase.auth().signInWithPhoneNumber(num, recaptcha);
+        otpBox.hidden = false; co.elements.otp.value = ''; co.elements.otp.focus();
+        otpResend.disabled = true; setTimeout(() => { otpResend.disabled = false; }, 30000);
+      } catch (e) {
+        showErr(t('errSms'));
+        try { recaptcha.clear(); recaptcha = new firebase.auth.RecaptchaVerifier('recaptchaHost', { size: 'invisible' }); } catch (err) {}
+      }
+      phoneSend.classList.remove('is-busy'); phoneSend.querySelector('span').textContent = t('sendCode');
+    };
+    phoneSend.addEventListener('click', send);
+    otpResend.addEventListener('click', send);
+    otpVerify.addEventListener('click', async () => {
+      const code = co.elements.otp.value.replace(/\D/g, '');
+      if (code.length !== 6 || !confirmation) return showErr(t('errOtp'));
+      otpVerify.classList.add('is-busy');
+      try {
+        const res = await confirmation.confirm(code);
+        phoneToken = await res.user.getIdToken();
+        phoneVerifiedFor = e164(co.elements.phone.value);
+        coErr.hidden = true; setPhoneVerified(true);
+      } catch (e) { showErr(t('errOtp')); }
+      otpVerify.classList.remove('is-busy');
+    });
+    co.elements.otp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); otpVerify.click(); } });
+  }
   const gsi = $('#gsi');
 
   // Google sign-in: shown only when the site has a client id configured (GET /api/config).
@@ -287,6 +348,7 @@
     try {
       const r = await fetch('/api/config'); const c = r.ok ? await r.json() : {};
       googleClientId = c.googleClientId || null;
+      let tries = 0; const waitFb = () => { if (window.firebase || tries++ > 40) setupPhone(c); else setTimeout(waitFb, 250); }; waitFb();
     } catch (e) { googleClientId = null; }
     if (!googleClientId) return;
     let tries = 0;
@@ -329,7 +391,7 @@
     if (!robot) return;
     robot.classList.remove('is-ok', 'is-working', 'is-bad'); robot.setAttribute('aria-checked', 'false');
     robot.querySelector('.robot__label').textContent = t('robot');
-    coSubmit.disabled = !(googleClientId && googleToken);
+    coSubmit.disabled = fb ? !phoneToken : !(googleClientId && googleToken);
   }
 
   // compact SHA-256 (hex) for the proof-of-work; ~1 µs per hash, so 15 bits ≈ 30 ms of work
@@ -390,23 +452,25 @@
     if (name.length < 2) { bad('name', 1); return showErr(t('errName')); }
     if (phone.replace(/\D/g, '').length < 7) { bad('phone', 1); return showErr(t('errPhone')); }
     if (address.length < 6) { bad('address', 1); return showErr(t('errAddress')); }
+    if (fb && (!phoneToken || e164(phone) !== phoneVerifiedFor)) { bad('phone', 1); return showErr(phoneToken ? t('errPhoneChanged') : t('errPhoneVerify')); }
     if (googleClientId && !googleToken) return showErr(t('errGoogle'));
-    if (!googleClientId && !captcha) { robot.classList.add('is-bad'); return showErr(t('errRobot')); }
+    if (!googleClientId && !fb && !captcha) { robot.classList.add('is-bad'); return showErr(t('errRobot')); }
     coErr.hidden = true; coSubmit.classList.add('is-busy');
     const items = cart.filter(lineOk).map(l => ({ id: l.id, size: l.size, color: l.color, qty: l.qty }));
     try {
-      const r = await fetch('/api/orders', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name, phone, address, notes, email: googleEmail || (f.email ? f.email.value.trim() : ''), google_token: googleToken, lang: lang(), items, captcha, started: coStarted, website: f.website.value }) });
+      const r = await fetch('/api/orders', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name, phone, address, notes, email: googleEmail || (f.email ? f.email.value.trim() : ''), google_token: googleToken, phone_token: phoneToken, lang: lang(), items, captcha, started: coStarted, website: f.website.value }) });
       const data = await r.json().catch(() => ({}));
       coSubmit.classList.remove('is-busy');
       if (!r.ok) {
         if (data.code === 'captcha') { resetRobot(); return showErr(t('errRobot')); }
+        if (data.code === 'phone') { phoneToken = null; setPhoneVerified(false); return showErr(t('errPhoneVerify')); }
         if (data.code === 'google') { googleToken = null; gsi.classList.remove('is-ok'); $('#gsiDone').hidden = true; return showErr(t('errGoogle')); }
         if (r.status === 409 && data.id) { const p = byId(data.id); return showErr(`${p ? name(p) : ''} ${t('errStock')}`); }
         if (data.field && f[data.field]) bad(data.field, 1);
         return showErr(data.error ? `${t('errNet')}` : t('errNet'));
       }
       try { localStorage.setItem('sama-customer', JSON.stringify({ name, phone, address })); } catch (err) {}
-      cart = []; save(); renderCart();
+      cart = []; save(); renderCart(); phoneToken = null; phoneVerifiedFor = ''; if (fb) setPhoneVerified(false);
       co.hidden = true; cartEmpty.hidden = true; cartItems.hidden = true; cartFoot.hidden = true;
       $('#doneRef').textContent = data.ref;
       const msg = lang() === 'ar' ? `مرحباً سما! بخصوص طلبي رقم ${data.ref}` : `Hi Sama! About my order ${data.ref}`;

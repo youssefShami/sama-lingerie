@@ -382,7 +382,17 @@
     <h4 class="checkout__title" data-s="coTitle">Your details</h4>
     <p class="checkout__sub" data-s="coSub">We confirm every order by WhatsApp before delivery. Payment on delivery.</p>
     <label class="field"><span data-s="coName">Full name</span><input name="name" type="text" autocomplete="name" required maxlength="80" /></label>
-    <label class="field"><span data-s="coPhone">Phone (WhatsApp)</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="76 910 051" required maxlength="32" /></label>
+    <label class="field"><span data-s="coPhone">Phone (WhatsApp)</span>
+      <span class="phone-row"><input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="76 910 051" required maxlength="32" /><button class="btn btn--dark btn--sm phone-send" type="button" id="phoneSend" hidden><span data-s="sendCode">Send code</span></button></span>
+    </label>
+    <div class="otp" id="otp" hidden>
+      <label class="field"><span data-s="otpLabel">Enter the 6-digit code we sent by SMS</span>
+        <span class="phone-row"><input name="otp" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]*" placeholder="••••••" /><button class="btn btn--dark btn--sm" type="button" id="otpVerify"><span data-s="verify">Verify</span></button></span>
+      </label>
+      <button class="otp__resend" type="button" id="otpResend" data-s="resend">Resend code</button>
+    </div>
+    <p class="phone-ok" id="phoneOk" hidden><svg aria-hidden="true" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-s="phoneVerified">Phone number verified</span></p>
+    <div id="recaptchaHost"></div>
     <label class="field"><span data-s="coAddress">Delivery address</span><textarea name="address" rows="2" autocomplete="street-address" required maxlength="300" placeholder="Building, street, area, city"></textarea></label>
     <label class="field" id="emailField"><span data-s="coEmail">Email (optional)</span><input name="email" type="email" inputmode="email" autocomplete="email" maxlength="120" /></label>
     <label class="field"><span data-s="coNotes">Notes (optional)</span><textarea name="notes" rows="2" maxlength="500"></textarea></label>
@@ -431,6 +441,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
 <script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js" defer></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js" defer></script>
 <script src="main.js"></script>
 <script src="products.js"></script>
 <script src="shop.js"></script>
