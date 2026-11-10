@@ -12,3 +12,5 @@ ADMIN-ACCESS.md
 img/preview-*.jpg
 .dev.vars
 .wrangler/
+password.txt
+*.password
