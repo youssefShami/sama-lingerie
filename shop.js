@@ -84,7 +84,8 @@
   // small image for grids: uploaded photos carry a `thumb`; stock photos get a smaller width param
   function small(u) {
     if (!u) return '';
-    if (/images\.(unsplash|pexels)\.com/.test(u)) return u.replace(/([?&])w=\d+/, '$1w=640');
+    const w = window.innerWidth < 600 ? 420 : 640; // phones get lighter thumbnails
+    if (/images\.(unsplash|pexels)\.com/.test(u)) return u.replace(/([?&])w=\d+/, '$1w=' + w);
     return u;
   }
   const thumb = p => p.thumb || small(p.img);

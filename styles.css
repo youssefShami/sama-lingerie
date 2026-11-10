@@ -456,3 +456,18 @@ html[dir="rtl"] .page__facts span{letter-spacing:0;font-size:.95rem}
 /* ---------- credit ---------- */
 .footer__dev{color:rgba(255,248,238,.75);border-bottom:1px solid rgba(255,248,238,.25);transition:color .3s,border-color .3s}
 .footer__dev:hover{color:var(--yellow);border-color:var(--yellow)}
+
+/* ---------- Phones: collections as image-free tiles (no horizontal row, nothing grabs the finger) ---------- */
+@media (max-width:759px){
+  .hscroll.is-native .hscroll__track{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;overflow:visible;padding-inline:var(--gutter);padding-bottom:0;scroll-snap-type:none;transform:none!important}
+  .hscroll.is-native .ccard{width:auto;gap:0;background:var(--cream);border-radius:var(--r-lg);padding:1.1rem 1rem 1.2rem;box-shadow:var(--shadow-soft);scroll-snap-align:none;transition:transform .4s var(--ease)}
+  .hscroll.is-native .ccard:active{transform:scale(.97)}
+  .hscroll.is-native .ccard__img{display:none}
+  .hscroll.is-native .ccard__meta{grid-template-columns:1fr;gap:.35rem}
+  .hscroll.is-native .ccard__n{font-size:.68rem}
+  .hscroll.is-native .ccard__meta h3{font-size:1.25rem}
+  .hscroll.is-native .ccard__meta p{grid-column:1;font-size:.8rem;line-height:1.4}
+  .hscroll.is-native .ccard--gold{background:var(--blush)}
+  .hscroll.is-native .ccard--cta{grid-column:1/-1;aspect-ratio:auto;padding:1.4rem;flex-direction:row;display:flex;align-items:center;justify-content:center;gap:.8rem;font-size:1.3rem}
+  .hscroll.is-native .ccard__bigd{width:34px;height:34px}
+}
