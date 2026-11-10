@@ -17,6 +17,6 @@ SUPABASE_URL = "https://fjxywdmrqnlydusaoywj.supabase.co"
 # Google "Sign in with Google" OAuth client id (public). Leave empty to use the "not a robot" check instead.
 GOOGLE_CLIENT_ID = ""
 # Firebase Phone Authentication (free SMS codes). Public web-app config values; leave empty to disable.
-FIREBASE_API_KEY = ""
-FIREBASE_AUTH_DOMAIN = ""
-FIREBASE_PROJECT_ID = ""
+FIREBASE_API_KEY = "AIzaSyAjoHShZ3sLFMDlC6VudYwi_S8rDoJwh3w"
+FIREBASE_AUTH_DOMAIN = "sama-3c1ef.firebaseapp.com"
+FIREBASE_PROJECT_ID = "sama-3c1ef"
