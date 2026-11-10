@@ -102,6 +102,8 @@ html[dir="rtl"] .btn:hover .btn__ico--end{transform:scaleX(-1) translateX(4px)}
 .hero__sheet{position:absolute;inset:0;z-index:4;background:var(--yellow);pointer-events:none}
 .hero__bar{position:absolute;left:50%;bottom:14vh;transform:translateX(-50%);width:min(200px,40vw);height:3px;background:rgba(255,255,255,.35);border-radius:3px;overflow:hidden}
 .hero__bar i{display:block;height:100%;width:0;background:#fff;border-radius:3px}
+.hero__credit{position:absolute;left:0;right:0;bottom:max(26px,calc(env(safe-area-inset-bottom,0px) + 20px));margin:0;text-align:center;font:500 .62rem/1 "Montserrat",sans-serif;letter-spacing:.26em;text-transform:uppercase;color:rgba(255,255,255,.62);opacity:0;will-change:opacity}
+.hero__credit b{font-weight:700;color:#fff}
 html.is-loading .hero__logoimg,html.is-loading .hero__eyebrow,html.is-loading .hero__tag,html.is-loading .hero__cta,html.is-loading .hero__scroll{opacity:0}
 html.is-loading .nav{opacity:0;pointer-events:none}
 html.is-loading{overflow:hidden}

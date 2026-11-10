@@ -212,6 +212,7 @@
     gsap.set(['.hero__eyebrow', '.hero__tag', '.hero__cta', '.hero__scroll'], { opacity: 0 }); // inline, so dropping the CSS class never pops them in
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' }, onComplete(){ sheet.remove(); if (lenis) lenis.start(); done(); } });
     tl.to(logo, { opacity: 1, duration: .7, ease: 'power2.out' }, .05)
+      .to('.hero__credit', { opacity: 1, duration: .9, ease: 'power2.out' }, .35)
       .to(bar, { width: '100%', duration: 1.0, ease: 'power2.inOut' }, .15)
       .to(bar.parentNode, { opacity: 0, duration: .3 }, 1.05)
       // the glide: logo to its final place, sheet melts away in the same breath
