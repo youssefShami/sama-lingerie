@@ -15,7 +15,7 @@ pages_build_output_dir = "dist-site"
 [vars]
 SUPABASE_URL = "https://fjxywdmrqnlydusaoywj.supabase.co"
 # Google "Sign in with Google" OAuth client id (public). Leave empty to use the "not a robot" check instead.
-GOOGLE_CLIENT_ID = ""
+GOOGLE_CLIENT_ID = "882423676722-ocjf9fdjijb3gcg614973n14dfooppkv.apps.googleusercontent.com"
 # Firebase Phone Authentication (SMS codes). Project sama-3c1ef: apiKey AIzaSyAjoHShZ3sLFMDlC6VudYwi_S8rDoJwh3w, authDomain sama-3c1ef.firebaseapp.com.
 # Google requires a billing account on the Firebase project before it sends SMS (auth/billing-not-enabled); fill these in once billing is attached.
 FIREBASE_API_KEY = ""

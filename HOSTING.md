@@ -74,17 +74,18 @@ In the dashboard → **Orders**: every order with its items, a **Send confirmati
 
 The "I'm not a robot" check is a signed proof-of-work challenge plus a honeypot field and a minimum fill time: no third-party keys needed. If you ever want Cloudflare Turnstile or Google reCAPTCHA instead, both can be dropped into `netlify/functions/orders.mjs` in a few lines.
 
-### Sign in with Google at checkout (optional, free)
-When a Google client id is configured, the checkout shows a **Sign in with Google** button instead of the "not a robot" check, and the customer's verified Google email is saved with the order (shown on the Orders page). Setup, about 5 minutes:
-1. https://console.cloud.google.com → create a project (e.g. "Sama Lingerie") → **APIs & Services → OAuth consent screen** → External → app name "Sama Lingerie", your email → Save (no scopes needed) → Publish app.
-2. **APIs & Services → Credentials → Create credentials → OAuth client ID** → Web application. Authorized JavaScript origins: `https://sama-lingerie.pages.dev` and later `https://<your-domain>`. Create.
-3. Copy the **Client ID** (ends with `.apps.googleusercontent.com`) into `wrangler.toml` → `GOOGLE_CLIENT_ID = "..."` → commit and push. Until then the checkout keeps the "not a robot" check and an optional email field.
+### Sign in with Google at checkout (live)
+The checkout shows a **Sign in with Google** button in place of the "not a robot" check. The customer taps it once, Google confirms the account, and the order is saved with the verified Google email (shown on the Orders page with a *Google* badge). Free, no SMS, no billing.
 
-### Phone number verification by SMS (free, Firebase)
-When Firebase is configured, the checkout asks the customer to **Send code**, an SMS with a 6-digit code arrives, and the order is only accepted with a verified number (`Verified` badge on the Orders page). Google's Firebase sends the SMS; the free Spark plan includes 10,000 verifications a month.
-1. https://console.firebase.google.com → Add project (name "Sama Lingerie", Analytics off) → Build → **Authentication → Get started → Sign-in method → Phone → Enable**.
-2. **Authentication → Settings → Authorized domains** → add `sama-lingerie.pages.dev` and later your domain.
-3. Project settings (gear) → **Your apps → Web app (</>)** → register "sama-site" → copy `apiKey`, `authDomain`, `projectId` into `wrangler.toml` (`FIREBASE_API_KEY`, `FIREBASE_AUTH_DOMAIN`, `FIREBASE_PROJECT_ID`) → commit and push.
+Where it lives: Google Cloud project **sama** (`sama-3c1ef`, the same project as Firebase), signed in with the shop's Google account.
+- Consent screen / branding: https://console.cloud.google.com/auth/branding?project=sama-3c1ef (app name "Sama Lingerie", audience External).
+- OAuth client: https://console.cloud.google.com/auth/clients?project=sama-3c1ef → **Web client**. Its Client ID is the `GOOGLE_CLIENT_ID` in `wrangler.toml`.
+- **When you buy a domain**: open that Web client → *Authorized JavaScript origins* → **Add URI** `https://<your-domain>` (and `https://www.<your-domain>` if you use www) → Save. Takes a few minutes to apply. Without this the button shows an error on the new domain.
+- To turn it off: set `GOOGLE_CLIENT_ID = ""` in `wrangler.toml` and push; the checkout falls back to the "not a robot" check and an optional email field.
+
+### Phone number verification by SMS (built, switched off)
+The code for SMS verification (Firebase Phone Auth) is in the site but disabled: Google only sends SMS from projects with a billing account attached (error `auth/billing-not-enabled`), and each message to Lebanon costs a few cents. Everything else is already configured in the Firebase project **sama** (`sama-3c1ef`): Phone provider enabled, Lebanon allowed in the SMS region policy, `sama-lingerie.pages.dev` authorized, web app "sama-site".
+To switch it on later: Firebase console → Upgrade to Blaze (attach a card) → put the web app's `apiKey`, `authDomain`, `projectId` into `wrangler.toml` (`FIREBASE_API_KEY`, `FIREBASE_AUTH_DOMAIN`, `FIREBASE_PROJECT_ID`, values in the comment there) → push. The checkout then asks for an SMS code before accepting the order and the Orders page shows a *Verified* badge.
 
 ## 6. Day-to-day: the dashboard
 
