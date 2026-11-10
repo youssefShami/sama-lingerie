@@ -100,11 +100,11 @@ html[dir="rtl"] .ocard__price em{letter-spacing:0}
 .cart-btn.bump svg{animation:bump .5s var(--ease)}
 @keyframes bump{30%{transform:scale(1.25) rotate(-8deg)}60%{transform:scale(.95)}}
 .nav.on-hero .cart-btn{background:rgba(255,255,255,.3)}
-.cart-fab{position:fixed;right:24px;bottom:150px;z-index:850;width:52px;height:52px;background:var(--ink);color:var(--cream);box-shadow:0 16px 40px -12px rgba(43,43,43,.5);transform:translateY(160px);transition:transform .7s var(--ease)}
+/* lives inside .floaters (above Instagram + WhatsApp) so the three never overlap on any screen */
+.cart-fab{position:relative;width:52px;height:52px;background:var(--ink);color:var(--cream);box-shadow:0 16px 40px -12px rgba(43,43,43,.5);opacity:0;transform:scale(.5);pointer-events:none;transition:transform .5s var(--ease),opacity .35s}
 .cart-fab b{background:var(--yellow);color:var(--ink)}
 .cart-fab svg{width:22px;height:22px}
-html[dir="rtl"] .cart-fab{right:auto;left:24px}
-body.has-items .cart-fab{transform:translateY(0)}
+body.has-items .cart-fab{opacity:1;transform:none;pointer-events:auto}
 .cart-fab:hover{background:#1c1c1c}
 
 /* ---------- Overlay / drawer ---------- */
