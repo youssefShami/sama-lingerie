@@ -9,3 +9,8 @@ pages_build_output_dir = "dist-site"
 #   SUPABASE_SERVICE_KEY  = sb_secret_...   (Supabase → Project settings → API Keys → Secret keys)
 #   SAMA_ADMIN_PASSWORD   = the dashboard password
 # For local development put the same three lines into a `.dev.vars` file (git-ignored).
+
+# Plain (non-secret) runtime variables. Because this file exists, Cloudflare takes vars from here;
+# secrets (SUPABASE_SERVICE_KEY, SAMA_ADMIN_PASSWORD) are set in the dashboard as encrypted Secrets.
+[vars]
+SUPABASE_URL = "https://fjxywdmrqnlydusaoywj.supabase.co"
