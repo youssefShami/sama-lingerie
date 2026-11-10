@@ -348,7 +348,13 @@
     try {
       const r = await fetch('/api/config'); const c = r.ok ? await r.json() : {};
       googleClientId = c.googleClientId || null;
-      let tries = 0; const waitFb = () => { if (window.firebase || tries++ > 40) setupPhone(c); else setTimeout(waitFb, 250); }; waitFb();
+      // Firebase (SMS codes) is only downloaded when the site is configured for it.
+      if (c.firebaseApiKey && phoneSend) {
+        const load = (src) => new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
+        load('https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js')
+          .then(() => load('https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js'))
+          .then(() => setupPhone(c)).catch(() => {});
+      }
     } catch (e) { googleClientId = null; }
     if (!googleClientId) return;
     let tries = 0;

@@ -292,3 +292,5 @@ html[dir="rtl"] .field{letter-spacing:0;font-size:.85rem}
 .phone-ok svg{width:18px;height:18px;color:#fff;background:#1f7a3f;border-radius:50%;padding:3px;flex:none}
 .field.is-verified input{border-color:#1f7a3f;background:#f3faf5}
 .grecaptcha-badge{visibility:hidden}
+
+.field[hidden]{display:none}
