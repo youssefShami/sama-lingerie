@@ -1,10 +1,12 @@
 {
-  "name": "sama",
+  "name": "sama-lingerie",
   "version": "1.0.0",
   "description": "Single-page, bilingual (EN / AR, RTL) site for Sama Lingerie, Saida, Lebanon. No build step: plain HTML + CSS + JS. GSAP 3 (ScrollTrigger) and Lenis are loaded from CDNs.",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node deploy-stage.mjs",
+    "dev": "node deploy-stage.mjs && npx wrangler pages dev dist-site",
+    "deploy": "node deploy-stage.mjs && npx wrangler pages deploy dist-site --project-name sama-lingerie"
   },
   "keywords": [],
   "author": "",
@@ -13,5 +15,6 @@
     "@netlify/blobs": "^8.2.0",
     "@netlify/functions": "^3.1.10",
     "@supabase/supabase-js": "^2.49.4"
-  }
+  },
+  "private": true
 }

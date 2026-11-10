@@ -1,0 +1,11 @@
+# Cloudflare Pages project config (used by `npx wrangler pages dev` locally and by Git deploys)
+name = "sama-lingerie"
+compatibility_date = "2025-10-01"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "dist-site"
+
+# Secrets are NOT stored here. Set them in Cloudflare → Workers & Pages → sama-lingerie → Settings → Variables and Secrets:
+#   SUPABASE_URL          = https://fjxywdmrqnlydusaoywj.supabase.co
+#   SUPABASE_SERVICE_KEY  = sb_secret_...   (Supabase → Project settings → API Keys → Secret keys)
+#   SAMA_ADMIN_PASSWORD   = the dashboard password
+# For local development put the same three lines into a `.dev.vars` file (git-ignored).

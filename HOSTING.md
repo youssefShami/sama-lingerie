@@ -5,18 +5,20 @@ Everything below is what you need to take the site from "demo link" to a profess
 
 ---
 
-## 1. What is already in place
+## 1. The stack
 
 | Piece | Where | Cost |
 |---|---|---|
-| Website (HTML/CSS/JS, served from a global CDN) | Netlify site `sama-lingerie` | Free |
-| API (catalogue, uploads, images, login) | Netlify Functions, folder `netlify/functions` | Free tier: 125k calls / month |
-| Data store (catalogue JSON, photos, password hash) | Netlify Blobs, stores `sama`, `images`, `auth` | Free tier |
-| Edge cache | Netlify Durable Cache, purged on every Save | Free |
-| Admin dashboard | `/admin/` | — |
+| Website + admin pages (static files on a global CDN) | **Cloudflare Pages** | Free |
+| API (catalogue, orders, uploads, login) | Cloudflare Pages Functions, folder `functions/api` | Free: 100k requests / day |
+| Database + photo storage | **Supabase** (Postgres + Storage), project `sama` | Free tier |
+| Code | GitHub `youssefShami/sama-lingerie` | Free |
+| Domain | Cloudflare Registrar (at-cost pricing) | about $10 / year for .com |
+
+(The `netlify/` folder is the previous host's version of the same API; delete it once Cloudflare is live.)
 
 ### Database: Supabase (Postgres + Storage)
-The API talks to **Supabase** when two environment variables are set on the Netlify site; otherwise it falls back to Netlify Blobs (used for local development).
+The API reads and writes **Supabase** through the secret key, which lives only in Cloudflare's encrypted variables (never in the browser).
 
 | Table | Holds |
 |---|---|
@@ -25,52 +27,41 @@ The API talks to **Supabase** when two environment variables are set on the Netl
 | `orders` | every order placed on the site (name, phone, address, items, total, status) |
 | Storage bucket `images` | compressed product / about photos, served from Supabase's CDN |
 
-Setup (once):
-1. Supabase → SQL editor → paste `supabase/schema.sql` → Run. It creates the tables, the `get_catalog()` / `replace_catalog()` functions and the `images` bucket.
-2. Supabase → Project settings → API keys: copy the **Project URL** and the **service_role** key (secret, server-side only).
-3. Netlify → Site configuration → Environment variables: add `SUPABASE_URL` and `SUPABASE_SERVICE_KEY`. Redeploy.
-4. Open the dashboard, press **Save** once to write the catalogue into Postgres.
-
-Reads are still answered from Netlify's edge cache (purged on every Save), so the site stays as fast as a static page while the data lives in a real database with backups, SQL and row-level security (the public anon key has no access; only the API's service key does).
+`supabase/schema.sql` has already been run on the project (tables, functions, `images` bucket, row-level security). The public key has no access to anything; only the API's secret key does. Catalogue reads are cached at Cloudflare's edge for 60 s and dropped on every Save.
 
 ---
 
-## 2. Buy the domain (≈ $10–15 / year)
+## 2. Put the site on Cloudflare Pages (free, about 10 minutes)
 
-Recommended registrars (cheap, no upsell, easy DNS): **Porkbun**, **Namecheap**, or **Cloudflare Registrar**.
-Suggested names, in order: `samalingerie.com`, `sama-lingerie.com`, `samalingerie.shop`, `sama.lb`
-(`.lb` domains are registered through LBDR / Lebanese registrars and cost more; `.com` is the safe choice).
+1. Push the code to GitHub once, from the project folder (a Git login window opens the first time):
+   ```
+   git push -u origin main
+   ```
+2. https://dash.cloudflare.com -> sign up or log in -> **Workers & Pages -> Create -> Pages -> Connect to Git** -> authorise GitHub -> pick `youssefShami/sama-lingerie`.
+3. Build settings: Framework preset **None**, Build command `node deploy-stage.mjs`, Build output directory `dist-site`, Root directory `/`.
+4. **Environment variables** (Production; repeat for Preview if you want preview deploys to work):
+   - `SUPABASE_URL` = `https://fjxywdmrqnlydusaoywj.supabase.co`
+   - `SUPABASE_SERVICE_KEY` = the **secret** key from Supabase -> Project settings -> API Keys (starts with `sb_secret_`). Tick *Encrypt*.
+   - `SAMA_ADMIN_PASSWORD` = the dashboard password (see `ADMIN-ACCESS.md`; change it later from the dashboard).
+   - `NODE_VERSION` = `20`
+5. **Save and Deploy**. The first build takes about a minute; the site appears at `https://sama-lingerie.pages.dev`. The functions in `functions/api` deploy with it.
+6. Open `https://sama-lingerie.pages.dev/admin/`, log in, press **Save** once: the catalogue is written into Supabase and the site starts reading from it.
+7. Every later `git push` to `main` redeploys automatically; pull requests get preview URLs.
 
-1. Search the name, add to cart for 1 year (turn on auto-renew so the site never goes dark).
-2. Keep **WHOIS privacy** on (free at Porkbun/Namecheap/Cloudflare).
-3. Pay. You now own the domain; nothing else to buy.
+## 3. Buy the domain and connect it (about $10 / year)
 
----
+Because the site is on Cloudflare, buying at **Cloudflare Registrar** is simplest: at-cost price, free WHOIS privacy, DNS already in place.
 
-## 3. Connect the domain to Netlify (free, ~10 minutes, HTTPS automatic)
+1. Cloudflare dashboard -> **Domain Registration -> Register Domains** -> search `samalingerie.com` (or `sama-lingerie.com`, `samalingerie.shop`) -> buy, auto-renew on.
+2. **Workers & Pages -> sama-lingerie -> Custom domains -> Set up a custom domain** -> enter the domain -> Cloudflare adds the DNS record itself -> **Activate**. Repeat for `www.samalingerie.com`. HTTPS is automatic.
+3. Optional: a Redirect Rule sending `www` to the bare domain.
+4. After it is live, replace `sama-lingerie.netlify.app` with your domain in `index.html`, `about.html` (canonical, og:url, og:image), `sitemap.xml`, `robots.txt`, `ADMIN-ACCESS.md`, then push.
 
-1. Netlify dashboard → site **sama-lingerie** → **Domain management** → **Add a domain** → type `samalingerie.com` → **Verify** → **Add domain**.
-2. Choose how to point DNS. Two options:
-
-   **Option A — Netlify DNS (simplest).** Netlify shows 4 name servers (like `dns1.p01.nsone.net`).
-   At your registrar open the domain → **Nameservers** → "Custom" → paste the 4 servers → save.
-   Netlify then manages all records, including `www`.
-
-   **Option B — keep your registrar's DNS.** Add these records at the registrar:
-   - `A` record, host `@`, value `75.2.60.5` (Netlify load balancer)
-   - `CNAME` record, host `www`, value `sama-lingerie.netlify.app`
-3. Back in Netlify → **Domain management**: set `samalingerie.com` as **primary domain** (the `www` version redirects to it automatically).
-4. **HTTPS**: Netlify issues a free Let's Encrypt certificate itself once DNS propagates (5 minutes to a few hours). Nothing to buy or renew.
-5. After it is live, update three things in the project and redeploy (see §6):
-   - `index.html`, `about.html`: the `canonical`, `og:url` and `og:image` URLs
-   - `sitemap.xml`, `robots.txt`: replace `sama-lingerie.netlify.app` with the new domain
-   - `ADMIN-ACCESS.md`: the dashboard address becomes `https://samalingerie.com/admin/`
-
----
+If you buy the domain elsewhere (Namecheap, Porkbun): either switch its nameservers to the two Cloudflare shows when you **Add a domain** (recommended), or add a `CNAME` for `@` and `www` pointing to `sama-lingerie.pages.dev`.
 
 ## 4. Professional email (optional)
 
-- **Free forwarding**: Porkbun and Cloudflare forward `hello@samalingerie.com` to the shop's Gmail at no cost (Registrar → Email forwarding).
+- **Free forwarding**: Cloudflare **Email Routing** forwards `hello@samalingerie.com` to the shop's Gmail at no cost (domain -> Email -> Email Routing).
 - **Real mailbox** (send *from* the domain): Zoho Mail Free (1 user) or Google Workspace (≈ $7 / user / month).
 
 ---
@@ -85,39 +76,29 @@ The "I'm not a robot" check is a signed proof-of-work challenge plus a honeypot 
 
 ## 6. Day-to-day: the dashboard
 
-- URL: `https://<your-domain>/admin/` — password in `ADMIN-ACCESS.md` (private). Change it in **Settings** on first login.
+- URL: `https://<your-domain>/admin/` (or `https://sama-lingerie.pages.dev/admin/`), password in `ADMIN-ACCESS.md` (private). Change it in **Settings** on first login.
 - Products, categories, offers, about text and photos are all live the moment you press **Save**; the edge cache is purged automatically.
 - **Backups**: Settings → **Export backup** downloads one JSON file with everything. Do it after big changes; **Import backup** restores it.
 - **Photos**: upload straight from the phone. Each photo is compressed in the browser (1200 px WebP + 480 px thumbnail), so the site stays fast with hundreds of items.
-- **Forgot the password**: Netlify → Site configuration → Environment variables → `SAMA_ADMIN_PASSWORD` → set a new value, then ask the developer to clear the stored hash (store `auth`, key `password-hash`) or run `npx netlify-cli blobs:delete auth password-hash` from the project folder.
+- **Forgot the password**: Supabase -> Table editor -> `settings` -> delete the row `password-hash`; the password then falls back to `SAMA_ADMIN_PASSWORD` in Cloudflare's variables (change that value there if needed).
 
 ---
 
 ## 7. Deploying changes to the code
 
-From the project folder (Node 18+ installed):
-
+Push to GitHub; Cloudflare builds and deploys automatically:
 ```bash
-npx -y netlify-cli@17.38.1 login
+git add -A && git commit -m "describe the change" && git push
 ```
+Local development with the real database (Node 18+): create `.dev.vars` in the project folder with the three variables from section 2 step 4, then
 ```bash
-node deploy-stage.mjs
+npm run dev
 ```
-```bash
-npx -y netlify-cli@17.38.1 deploy --prod --dir dist-site
-```
-
-`deploy-stage.mjs` copies only the public files into `dist-site/` (no `node_modules`, notes or scripts);
-functions are picked up from `netlify.toml`. Test locally first with `npx -y netlify-cli@17.38.1 dev` → http://localhost:8888.
-
-The code also lives in GitHub: https://github.com/youssefShami/sama-lingerie. Push with `git push` from the project folder. To make every push deploy automatically, Netlify → **Site configuration → Build & deploy → Link repository** → pick the repo; build command: `node deploy-stage.mjs`, publish directory: `dist-site`.
-
----
+-> http://localhost:8788 (site + API). `.dev.vars` is git-ignored; never commit it.
 
 ## 8. Limits and when to upgrade
 
-Netlify Free covers a boutique comfortably: 100 GB bandwidth, 125k function calls and 300 build minutes per month, Blobs and Durable Cache included.
-Reasons to move to **Netlify Pro** (≈ $19–20 / month): remove the "Powered by Netlify" badge on free sites, more bandwidth, password-protected previews, more team members.
+Cloudflare Pages Free: unlimited bandwidth and requests for static files, 100,000 function requests per day, 500 builds per month, no badge. Supabase Free: 500 MB database, 1 GB file storage, 5 GB egress per month; projects pause after a week with no traffic (visitors keep it awake). Upgrade Supabase to Pro ($25 / month) only if storage or traffic outgrows that; Cloudflare Workers Paid ($5 / month) only above 100k API calls a day.
 
 ---
 
@@ -125,11 +106,12 @@ Reasons to move to **Netlify Pro** (≈ $19–20 / month): remove the "Powered b
 
 - [ ] Replace the placeholder products and stock photos in the dashboard with the real shoot (names EN/AR, prices, sizes, stock).
 - [ ] Rewrite the About text and story in the dashboard; upload the shop's own photos.
-- [ ] Buy the domain, connect it, set it as primary, wait for HTTPS.
+- [ ] Push to GitHub, connect Cloudflare Pages, add the variables, deploy, press Save in the dashboard.
+- [ ] Buy the domain, add it as a custom domain, wait for HTTPS.
 - [ ] Update canonical / OG / sitemap URLs to the domain and redeploy.
 - [ ] Share `https://<domain>/` on Instagram bio (`@sama_lingerie.lb`) and WhatsApp Business profile.
 - [ ] Create a free **Google Business Profile** with the address (Ghassan Hammoud St, Saida), hours (10:00–17:00) and the website link.
-- [ ] Add the site to **Google Search Console** (verify via Netlify DNS TXT record) and submit `sitemap.xml`.
+- [ ] Add the site to **Google Search Console** (verify with a DNS TXT record in Cloudflare) and submit `sitemap.xml`.
 - [ ] Change the admin password; store it in a password manager; export a first backup.
 
 Developed by **Arzware** — https://arzware.net

@@ -44,7 +44,11 @@ WhatsApp / phone +961 76 910 051 → https://wa.me/96176910051 · Instagram @sam
 - Settings: change password, export / import a JSON backup, reset to the seed data.
 - Photos are compressed in the browser before upload (max 1200 px WebP + a 480 px thumbnail used in grids), so phone photos end up at ~100–300 KB instead of several MB.
 
-## Backend (Netlify Functions + Supabase; Netlify Blobs as local fallback)
+## Backend (Cloudflare Pages Functions + Supabase)
+- `functions/api/*.js` is the live API on Cloudflare Pages: `catalog`, `orders`, `upload`, `auth`, shared helpers in `_lib.js` (Web Crypto, Supabase client). `supabase/schema.sql` has the tables, SQL functions and storage bucket. `wrangler.toml`, `_headers`, `_redirects` are the Cloudflare config.
+- `netlify/` is the previous host's version of the same API (Netlify Functions + Blobs fallback), kept for reference and safe to delete once Cloudflare is live.
+
+## Backend details (Netlify version)
 - `netlify/functions/orders.mjs` — `GET /api/orders?challenge=1` (captcha), `POST /api/orders` (place order), `GET/PATCH /api/orders` (admin). `netlify/lib/db.mjs` — data layer: Supabase when `SUPABASE_URL` + `SUPABASE_SERVICE_KEY` are set, Netlify Blobs otherwise. `supabase/schema.sql` — tables, functions, storage bucket.
 - `netlify/functions/catalog.mjs` — `GET /api/catalog` (public, CDN-cached 20 s) / `PUT /api/catalog` (admin). The live catalogue lives in the `sama` blob store; `products.js` is only the seed / fallback.
 - `netlify/functions/upload.mjs` — `POST /api/upload` (admin) stores images in the `images` blob store; `netlify/functions/img.mjs` serves them at `/api/img/<key>` with a one-year cache.
@@ -52,8 +56,4 @@ WhatsApp / phone +961 76 910 051 → https://wa.me/96176910051 · Instagram @sam
 - `netlify/lib/api.mjs` — shared helpers.
 
 ## Deploy
-The site is on Netlify (site `sama-lingerie`). From this folder:
-
-    npx -y netlify-cli@17.38.1 deploy --prod --dir dist-site
-
-`node deploy-stage.mjs` builds the `dist-site` folder (only the public files, no node_modules); functions are picked up from `netlify.toml`.
+Cloudflare Pages builds from GitHub on every push (build `node deploy-stage.mjs`, output `dist-site`). See `HOSTING.md` for the one-time setup, variables and the custom domain. Local dev: `npm run dev` (needs `.dev.vars`).

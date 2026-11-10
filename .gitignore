@@ -10,3 +10,5 @@ ADMIN-ACCESS.md
 .env
 .env.*
 img/preview-*.jpg
+.dev.vars
+.wrangler/
